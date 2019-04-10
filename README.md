@@ -6,7 +6,7 @@
 
 [Distributed Representations, Simple Recurrent Networks, and Grammatical Structure](https://link.springer.com/content/pdf/10.1023/A:1022699029236.pdf), Elman (1991)
 
-[Learning and development in neural networks: The importance of starting small](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.128.4487&rep=rep1&type=pdf), Elamn (1993)
+[Learning and development in neural networks: The importance of starting small](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.128.4487&rep=rep1&type=pdf), Elman (1993)
 
 [A Recurrent Neural Network that Learns to Count](http://fuzzy.cs.ovgu.de/publications/other/RodWilElm99.pdf), Rodriguez et al. (1999)
 
@@ -20,9 +20,13 @@
 
 [Structures, Not Strings: Linguistics as Part of the Cognitive Sciences](https://www.sciencedirect.com/science/article/pii/S1364661315002326), Everaert et al. (2015) 
 
+[The Now-or-Never bottleneck: A fundamental constraint on language](http://cnl.psych.cornell.edu/pubs/2016-cc-BBS.pdf), Christiansen and Chater (2016)
+
 [Assessing the Ability of LSTMs to Learn Syntax-Sensitive Dependencies](http://aclweb.org/anthology/Q16-1037), Linzen et al. (2016) [[code]](https://github.com/TalLinzen/rnn_agreement)
 
 [Recurrent Neural Network Grammars](https://www.aclweb.org/anthology/N16-1024), Dyer et al. (2016)
+
+[Sequence Memory Constraints Give Rise to Language-Like Structure through Iterated Learning](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0168532), Cornish et al. (2017)
 
 [Exploring the Syntactic Abilities of RNNs with Multi-task Learning](http://aclweb.org/anthology/K17-1003), Enguehard et al. (2017) [[code]](https://github.com/emengd/multitask-agreement)
 
@@ -34,9 +38,11 @@
 
 [Colorless green recurrent networks dream hierarchically](http://aclweb.org/anthology/N18-1108), Gulordava et al. (2018) [[code]](https://github.com/facebookresearch/colorlessgreenRNNs)
 
-[The Importance of Being Recurrent for Modeling Hierarchical Structure](http://aclweb.org/anthology/D18-1503), Tran et al. (2018) [[code]](https://github.com/ketranm/fan_vs_rnn)
-
 [Targeted Syntactic Evaluation of Language Models](http://aclweb.org/anthology/D18-1151), Marvin and Linzen (2018) [[code]](https://github.com/BeckyMarvin/LM_syneval)
+
+[Deep RNNs Encode Soft Hierarchical Syntax](https://aclweb.org/anthology/P18-2003), Blevins et al. (2018)
+
+[The Importance of Being Recurrent for Modeling Hierarchical Structure](http://aclweb.org/anthology/D18-1503), Tran et al. (2018) [[code]](https://github.com/ketranm/fan_vs_rnn)
 
 [What can linguistics and deep learning contribute to each other?](https://arxiv.org/pdf/1809.04179.pdf), Linzen (2018)
 
