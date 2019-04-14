@@ -1,0 +1,29 @@
+pattern	form	form_alt	len_prefix	sent
+question	?	.	5	What are you doing here ?
+question	?	,	5	What are you doing here ?
+question	What	Which	0	What are you doing here ?
+question	What	Where	0	What are you doing here ?
+question	What	When	0	What are you doing here ?
+question	What	Where	0	What are you doing here ?
+question	What	How	0	What are you doing here ?
+question	?	.	3	How are you ?
+question	?	.	4	Who walked the dog ?
+question	Who	What	0	What walked the dog ?
+question	?	.	5	So whom did you call ?
+question	whom	who	1	So whom did you call ?
+question	?	.	6	What did you try to do ?
+question	When	What	0	When did they arrive ?
+punctuation	...	.	4	It is not cold ... it is freezing cold .
+punctuation	...	,	4	It is not cold ... it is freezing cold .
+punctuation	...	=	4	It is not cold ... it is freezing cold .
+punctuation	...	:	4	It is not cold ... it is freezing cold .
+punctuation	...	--	4	It is not cold ... it is freezing cold .
+punctuation	--	.	4	It is not cold -- it is freezing cold .
+punctuation	--	;	4	It is not cold -- it is freezing cold .
+punctuation	-	.	4	It is not cold - it is freezing cold .
+punctuation	-	;	4	It is not cold - it is freezing cold .
+punctuation	...	;	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today .
+punctuation	...	,	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today .
+punctuation	...	.	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today .
+punctuation	...	-	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today .
+punctuation	...	--	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today .

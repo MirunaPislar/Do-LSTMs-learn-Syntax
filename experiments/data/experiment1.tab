@@ -1,0 +1,16 @@
+pattern	form	form_alt	len_prefix	sent
+semantics	barks	bark	5	The dog in the neighbourhood barks at night .
+semantics	barks	bark	5	The cat in the neighbourhood barks at night .
+semantics	sits	sit	2	The cat sits on the mat .
+semantics	cat	dog	1	The cat sat on the mat .
+semantics	bark	barks	5	The dogs in the neighbourhood bark at night .
+semantics	dogs	cats	1	The dogs in the neighbourhood bark at night .
+semantics	dog	cat	1	The dog in the neighbourhood barks at night .
+semantics	bark	barks	5	The cats in the neighbourhood bark at night .
+semantics	sit	bark	5	The cats in the neighbourhood sit at night .
+semantics	bark	sit	5	The dogs in the neighbourhood bark at night .
+semantics	boy	girl	1	The boy shaved himself .
+semantics	girl	boy	1	The girl shaved herself .
+semantics	himself	herself	3	The boy shaved himself .
+semantics	herself	himself	3	The girl shaved herself .
+anaphora	it	she	5	She dropped the plate and it shattered loudly .
