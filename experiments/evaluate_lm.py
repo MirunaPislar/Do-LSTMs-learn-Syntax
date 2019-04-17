@@ -1,4 +1,5 @@
 from dictionary_corpus import Dictionary, tokenize_sentence
+from pytorch_pretrained_bert import BertForMaskedLM, tokenization
 from numpy import array
 from tqdm import tqdm
 
@@ -25,6 +26,8 @@ parser.add_argument("--mask_target", type=bool, default=False,
                     help="Whether to mask or not the target word(s).")
 parser.add_argument("--seed", type=int, default=532,
                     help="Random seed")
+parser.add_argument("--model_name", type=str, default="lm",
+                    help="Name of the model to perform the evaluation.")
 parser.add_argument("--cuda", action="store_true",
                     help="use CUDA")
 args = parser.parse_args()
@@ -126,7 +129,7 @@ def repackage_hidden(hidden):
         return tuple(repackage_hidden(v) for v in hidden)
 
 
-def evaluate(data, model, dictionary):
+def evaluate_lm(data, model, dictionary):
     """
     Evaluate a language model on certain data examples.
     :param data: data to be evaluated by the language model
@@ -139,8 +142,6 @@ def evaluate(data, model, dictionary):
     for (sent, target_idx, good, bad) in tqdm(data):
         if args.mask_target:
             pre, target, post = sent.split("***")
-            if "mask" in target.lower():
-                target = "[MASK]"
             all_token_idx = tokenize_sentence(dictionary, pre + target + post)
         else:
             all_token_idx = tokenize_sentence(dictionary, sent)
@@ -160,11 +161,46 @@ def evaluate(data, model, dictionary):
         mask[int(target_idx) - 1] = True
         mask = array(mask)
 
-        # Get scores for the masked target word
+        # Get scores for the target word
         res = log_probs_np[mask][0]
         scores = [float(x) for x in res[word_ids]]
 
         hidden = repackage_hidden(hidden)
+        good_score = scores[0]
+        bad_score = scores[1]
+        print(str(good_score > bad_score),
+              good, good_score, bad, bad_score,
+              sent.encode("utf8"), sep=u"\t")
+
+
+def evaluate_bert(data, bert, tokenizer):
+    bert.eval()
+    for (sent, target_idx, good, bad) in tqdm(data):
+        if args.mask_target:
+            pre, target, post = sent.split("***")
+            target = ["[MASK]"]
+        else:
+            splits = sent.split()
+            pre, target, post = " ".join(splits[:target_idx]), \
+                                splits[target_idx], \
+                                " ".join(splits[(target_idx + 1):])
+            target = tokenizer.tokenize(target)
+
+        tokens = ["[CLS]"] + tokenizer.tokenize(pre)
+        tok_target_idx = len(tokens)
+        tokens += target + tokenizer.tokenize(post) + ["[SEP]"]
+        all_token_idx = tokenizer.convert_tokens_to_ids(tokens)
+        try:
+            word_ids = tokenizer.convert_tokens_to_ids([good, bad])
+        except KeyError:
+            print("Skipping bad wins: %s and %s." % (good, bad))
+            continue
+
+        # Get scores for the target word
+        mask = torch.LongTensor(all_token_idx).unsqueeze(0)
+        res = bert(mask)[0, tok_target_idx]
+        scores = [float(x) for x in res[word_ids]]
+
         good_score = scores[0]
         bad_score = scores[1]
         print(str(good_score > bad_score),
@@ -183,11 +219,17 @@ def main():
     dictionary = Dictionary(args.vocab)
     print("Vocabulary size = ", len(dictionary))
 
-    # Load the model
-    model = load_model()
-
-    # Evaluate the sentences
-    evaluate(data, model, dictionary)
+    # Load and evaluate a model
+    if args.model_name == "lm":
+        model = load_model()
+        evaluate_lm(data, model, dictionary)
+    elif "bert" in args.model_name:
+        model_name = "bert-large-uncased"
+        if "base" in args.model_name:
+            model_name = "bert-base-uncased"
+        bert = BertForMaskedLM.from_pretrained(model_name)
+        tokenizer = tokenization.BertTokenizer.from_pretrained(model_name)
+        evaluate_bert(data, bert, tokenizer)
 
 
 if __name__ == "__main__":
