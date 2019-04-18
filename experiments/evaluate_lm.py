@@ -44,9 +44,10 @@ if torch.cuda.is_available():
 def read_datafile():
     """
     Reads one row at a time from a data file.
-    If the intention is to evaluate only a target (masked) word, then
-    the data file needs to have the following mandatory header fields:
-        * pattern - type of targeted syntactic structure that is evaluated
+    If your intention is to evaluate only a target (masked) word,
+    (as proposed and done in Linzen et al. (2016) and Gulordava et al. (2018))
+    then the data file needs to have the following *mandatory* header fields:
+        * pattern - type of targeted syntactic test
         * sent - the sentence to be evaluated by the language model
                - it needs to be the same for pairs of grammatical
                 and ungrammatical sentences
@@ -54,6 +55,13 @@ def read_datafile():
         * form_alt - the incorrect form of the word to be evaluated (target)
         * len_prefix - length of the sentence up to the form/form_alt word
                        i.e. index (position) of the target
+
+    Instead, if your intention is to evaluate the whole sentence,
+    (as proposed and done in Marvin and Linzen (2018))
+    then the data file needs to have the following mandatory header fields:
+        * pattern - type of targeted syntactic test
+        * sent - the grammatical sentence to be evaluated by the language model
+        * sent_alt - the ungrammatical variant of the sentence to be evaluated
     """
     rows = csv.DictReader(open(args.data, encoding="utf8"), delimiter="\t")
     data = []
@@ -148,10 +156,14 @@ def repackage_hidden(hidden):
 def evaluate_lm_target_words(data, model, dictionary):
     """
     Evaluate a language model on certain data examples.
+    This method only computes and prints the probability
+    of a target word in a pair of sentences. A language model
+    that captures syntax is expected to assign a higher
+    probabilities to the correct form of the target word.
     :param data: data to be evaluated by the language model
     :param model: a pre-trained language model
-    :param dictionary: the vocabulary of the corpus on which
-                       the language model has been trained
+    :param dictionary: based on the vocabulary of the corpus
+                       on which the LM has been trained
     """
     model.eval()
     hidden = model.init_hidden(bsz=1)  # no. of parallel sentences processed
@@ -172,12 +184,12 @@ def evaluate_lm_target_words(data, model, dictionary):
         log_probs = F.log_softmax(output_flat).data
         log_probs_np = log_probs.cpu().numpy()
 
-        # Create mask for the target word prediction
+        # Create mask for the target word.
         mask = [False] * len(token_ids)
         mask[int(target_idx) - 1] = True
         mask = array(mask)
 
-        # Get scores for the target word
+        # Get scores for the target word.
         log_probs_target = log_probs_np[mask][0]
         scores = [float(x) for x in log_probs_target[word_ids]]
 
@@ -189,7 +201,7 @@ def evaluate_lm_target_words(data, model, dictionary):
               sent.encode("utf8"), sep=u"\t")
 
 
-def eval_whole_sent(token_ids, model, dictionary):
+def eval_each_word_in_sentence(token_ids, model, dictionary):
     model.eval()
     hidden = model.init_hidden(bsz=1)
 
@@ -205,14 +217,12 @@ def eval_whole_sent(token_ids, model, dictionary):
         word_idx = token_ids[i + 1]
         if dictionary.idx2word[word_idx].lower() == "<eos>":
             continue
-        mask = [False] * seq_len
-        mask[i] = True
-        log_probs_target = float(log_probs_np[mask][0][word_idx])
-        word_scores.append(log_probs_target)
+        mask_this_word = [False] * seq_len
+        mask_this_word[i] = True
+        log_prob_this_word = float(log_probs_np[mask_this_word][0][word_idx])
+        word_scores.append(log_prob_this_word)
         print(str(dictionary.idx2word[word_idx]),
-              str(i),
-              str(log_probs_target),
-              sep="\t")
+              str(i), str(log_prob_this_word), sep="\t")
     print()
     return word_scores
 
@@ -220,19 +230,23 @@ def eval_whole_sent(token_ids, model, dictionary):
 def evaluate_lm_sentences(data, model, dictionary):
     """
     Evaluate a language model on certain data examples.
+    This method computes and prints the probabilities
+    of all the words in a pair of sentences. A language model
+    that captures syntax is expected to assign a higher
+    probabilities to the grammatical sentence (as a whole).
     :param data: data to be evaluated by the language model
     :param model: a pre-trained language model
-    :param dictionary: the vocabulary of the corpus on which
-                       the language model has been trained
+    :param dictionary: based on the vocabulary of the corpus
+                       on which the LM has been trained
     """
     for (pattern, sent, sent_alt) in tqdm(data):
         print()
         token_ids = tokenize_sentence(dictionary, sent)
         token_ids_alt = tokenize_sentence(dictionary, sent_alt)
 
-        word_scores = eval_whole_sent(
+        word_scores = eval_each_word_in_sentence(
             token_ids, model, dictionary)
-        word_scores_alt = eval_whole_sent(
+        word_scores_alt = eval_each_word_in_sentence(
             token_ids_alt, model, dictionary)
 
         assert(len(word_scores) == len(word_scores_alt)), \
@@ -250,6 +264,16 @@ def evaluate_lm_sentences(data, model, dictionary):
 
 
 def evaluate_bert(data, bert, tokenizer):
+    """
+    Evaluate BERT on certain data examples.
+    This method only computes and prints the probability
+    of a masked target word in a pair of sentences.
+    This implementation is based on Goldberg's. Check:
+    https://github.com/yoavg/bert-syntax for more details.
+    :param data: data to be evaluated by the language model
+    :param bert: a pre-trained BERT language model
+    :param tokenizer: BERT's tokenizer
+    """
     bert.eval()
     for (pattern, sent, target_idx, good, bad) in tqdm(data):
         if args.mask_target:
@@ -279,7 +303,7 @@ def evaluate_bert(data, bert, tokenizer):
         # Get the word probabilities for the target (masked) word.
         probs = F.softmax(logits[0, tok_target_idx], dim=-1)
 
-        # Maximum prediction token
+        # Identify the maximum prediction token.
         predicted_index = torch.argmax(probs).item()
         predicted_token = tokenizer.convert_ids_to_tokens([predicted_index])[0]
 
@@ -294,17 +318,17 @@ def evaluate_bert(data, bert, tokenizer):
 
 
 def main():
-    # Load the data to be evaluated
+    # Load the data/templates to be evaluated.
     if args.original:
         data = read_datafile_original()
     else:
         data = read_datafile()
 
-    # Load the corpus dictionary
+    # Load the corpus vocabulary into a dictionary.
     dictionary = Dictionary(args.vocab)
     print("Vocabulary size = ", len(dictionary))
 
-    # Load and evaluate a model
+    # Load and evaluate a pre-trained language model.
     if args.model_name == "lm":
         model = load_model()
         if args.eval_only_target_word:
@@ -323,7 +347,7 @@ def main():
         tokenizer = tokenization.BertTokenizer.from_pretrained(model_name)
         evaluate_bert(data, bert, tokenizer)
     else:
-        raise ValueError("Invalid model name %s" % args.model_name)
+        raise ValueError("Invalid model name %s!" % args.model_name)
 
 
 if __name__ == "__main__":
