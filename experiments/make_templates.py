@@ -1,22 +1,84 @@
-from templates import CoordinationTemplates
-from terminals import CoordinationTerminals
-import pandas as pd
+from templates import TenseAgreementTemplates, CoordinationTemplates
+from terminals import TenseAgreementTerminals, CoordinationTerminals
+import argparse
 import os
-import sys
+import random
+import pandas as pd
+
+parser = argparse.ArgumentParser(
+    description="Create targeted syntactic templates.")
+
+parser.add_argument("--filename", type=str, default="data/my_template.tab",
+                    help="Name of the file in which to save the templates.")
+parser.add_argument("--type", type=str, default="tense",
+                    help="Type of template to construct. Choose from: "
+                         "[coord, tense].")
+# parser.add_argument("--seed", type=int, default=1121,
+#                    help="Value of the random seed.")
+args = parser.parse_args()
 
 
 class MakeAgreementTemplate:
     def __init__(self):
-        self.terminals = CoordinationTerminals().terminals
-        self.rules = CoordinationTemplates().rules
+        if args.type == "coord":
+            self.terminals = CoordinationTerminals().terminals
+            self.rules = CoordinationTemplates().rules
+        elif args.type == "tense":
+            self.terminals = TenseAgreementTerminals().terminals
+            self.rules = TenseAgreementTemplates().rules
+        self.verbs_of_tense = {
+            "presBe": ["is", "are"],
+            "pres": ["does", "do"],
+            "presCont": ["has", "have"],
+            "future": ["will"],
+            "past": ["did", "had"],
+            "pastCont": ["was", "were"]}
+        self.verbs_of_number = {
+            "sg": ["is", "was", "does", "did", "has", "will", "had"],
+            "pl": ["are", "were", "do", "did", "have", "will", "had"]}
+
+    def switch_tense(self, words, preterms_idx):
+        new_words = []
+        my_number = preterms_idx.split("_")[-1]
+        my_tense = preterms_idx.split("_")[-2]
+
+        possible_verbs = self.verbs_of_number[my_number]
+        valid_verbs = []
+        for tense, verbs in self.verbs_of_tense.items():
+            if tense == my_tense:
+                continue
+            for verb in verbs:
+                if verb in possible_verbs:
+                    valid_verbs.append(verb)
+        random.shuffle(valid_verbs)
+        for word in words:
+            splits = word.split()
+            sampled_verb = random.choice(valid_verbs)
+            if len(splits) > 1:
+                new_words.append(" ".join(sampled_verb + splits[1:]))
+            else:
+                new_words.append(sampled_verb)
+        return new_words
 
     def switch_number(self, words, preterms_idx):
         new_words = []
         is_verb = preterms_idx[-1] == "V"
         is_mod = len(preterms_idx) > 2 and preterms_idx[-3:] == "MOD"
         for word in words:
-            if is_mod:
-                splits = word.split()
+            splits = word.split()
+            if splits[0] == "is":
+                new_words.append(" ".join(["are"] + splits[1:]))
+            elif splits[0] == "are":
+                new_words.append(" ".join(["is"] + splits[1:]))
+            elif splits[0] == "was":
+                new_words.append(" ".join(["were"] + splits[1:]))
+            elif splits[0] == "were":
+                new_words.append(" ".join(["was"] + splits[1:]))
+            elif splits[0] == "has":
+                new_words.append(" ".join(["have"] + splits[1:]))
+            elif splits[0] == "have":
+                new_words.append(" ".join(["has"] + splits[1:]))
+            elif is_mod:
                 if len(splits) > 1:
                     if splits[0][-2:] == "es":
                         new_words.append(" ".join([splits[0][:-2]] + splits[1:]))
@@ -28,7 +90,6 @@ class MakeAgreementTemplate:
                     else:
                         new_words.append(word + "es")
             elif is_verb:
-                splits = word.split()
                 if len(splits) > 1:
                     if splits[0][-1] == "s":
                         new_words.append(" ".join([splits[0][:-1]] + splits[1:]))
@@ -58,7 +119,13 @@ class MakeAgreementTemplate:
     def switch_numbers(self, base_sent, variables, preterms):
         new_sent = base_sent[:]
         for idx in variables:
-            new_sent[idx] = self.switch_number(new_sent[idx], preterms[idx])
+            if args.type == "coord":
+                new_sent[idx] = self.switch_number(new_sent[idx], preterms[idx])
+            elif args.type == "tense":
+                new_sent[idx] = self.switch_tense(new_sent[idx], preterms[idx])
+            else:
+                raise ValueError("Unknown value for template type: %s."
+                                 "Choose between tense and coord." % args.type)
         return new_sent
 
     def make_variable_sentences(self, preterms, match, vary):
@@ -117,23 +184,20 @@ class MakeTestCase:
 
 
 def main():
-    if len(sys.argv) != 2:
-        raise ValueError("ERROR: more than one argument provided!"
-                         "Correct usage: python make_templates.py [filename]")
-    filename = "data/" + sys.argv[1] + ".txt"
-    if os.path.isfile(filename):
-        os.remove(filename)
+    if os.path.isfile(args.filename):
+        os.remove(args.filename)
 
     argument_template = MakeAgreementTemplate()
-    argument_test_cases = argument_template.rules.keys()
+    argument_test_cases = argument_template.rules.keys()\
 
     for case in argument_test_cases:
         sentences = MakeTestCase(argument_template, case)
         df = pd.DataFrame.from_dict(sentences.sent_templates)
-        if os.path.isfile(filename):
-            df.to_csv(filename, mode="a", header=False, index=False, sep="\t")
+        if os.path.isfile(args.filename):
+            df.to_csv(args.filename, mode="a", header=False,
+                      index=False, sep="\t")
         else:
-            df.to_csv(filename, mode="a", index=False, sep="\t")
+            df.to_csv(args.filename, mode="a", index=False, sep="\t")
 
 
 if __name__ == "__main__":
