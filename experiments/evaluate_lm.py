@@ -1,29 +1,38 @@
 from dictionary_corpus import Dictionary, tokenize_sentence
-from numpy import array
+from torch.autograd import Variable
+from numpy import array, argmax
 from pytorch_pretrained_bert import BertForMaskedLM, tokenization
 from tqdm import tqdm
 
 import argparse
 import csv
+import sys
 import torch
 import torch.nn.functional as F
+import warnings
+
+warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser(
-    description="Language Model Evaluation: "
-    "extracts softmax vectors for the specified words.")
+    description="Language Model Evaluation.")
 
 parser.add_argument("--data", type=str, default="data/generated.tab",
                     help="Path to the data file to be evaluated.")
-parser.add_argument("--original", type=bool, default=False,
+parser.add_argument("--original", default=False, action="store_true",
                     help="Whether the data file is in the original format"
                          "(as in Gulordava et al. \"generated.tab\") or not.")
-parser.add_argument("--eval_only_target_word", type=bool, default=False,
-                    help="Whether to evaluate the langauge model only on "
-                         "the target words or on the whole sentence.")
-parser.add_argument("--vocab", type=str, default="data/",
-                    help="Path to the directory to the corpus "
-                         "vocabulary (of the language model).")
-parser.add_argument("--mask_target", type=bool, default=False,
+parser.add_argument("--eval_target_word", default=False, action="store_true",
+                    help="Whether to evaluate the language model only on "
+                         "the target word or on the whole sentence.")
+parser.add_argument("--print_word_probs", default=False, action="store_true",
+                    help="Whether or not to print word probabilities too"
+                         "(this only is effective if the evaluation "
+                         "is performed on the whole sentence, "
+                         "i.e. when \"eval_target_word\" is set to False)")
+parser.add_argument("--vocab", type=str, default="data/vocab.txt",
+                    help="Path to the vocabulary corresponding to the corpus "
+                         "on which the language model has been trained.")
+parser.add_argument("--mask_target", default=False, action="store_true",
                     help="Whether to mask or not the target word(s).")
 parser.add_argument("--seed", type=int, default=532,
                     help="Random seed")
@@ -36,7 +45,8 @@ args = parser.parse_args()
 torch.manual_seed(args.seed)
 if torch.cuda.is_available():
     if not args.cuda:
-        print("WARNING: CUDA device available. Consider running with --cuda.")
+        print("WARNING: CUDA device available. Consider running with --cuda.",
+              file=sys.stderr)
     else:
         torch.cuda.manual_seed(args.seed)
 
@@ -56,29 +66,44 @@ def read_datafile():
         * len_prefix - length of the sentence up to the form/form_alt word
                        i.e. index (position) of the target
 
-    Instead, if your intention is to evaluate the whole sentence,
-    (as proposed and done in Marvin and Linzen (2018))
-    then the data file needs to have the following mandatory header fields:
+    Instead, if your intention is to evaluate the whole sentence
+    (as proposed and done by Marvin and Linzen (2018))
+    then the following fields either need to be in the header of the data file
+    or they are extracted from a "target-only" data file:
         * pattern - type of targeted syntactic test
         * sent - the grammatical sentence to be evaluated by the language model
         * sent_alt - the ungrammatical variant of the sentence to be evaluated
     """
     rows = csv.DictReader(open(args.data, encoding="utf8"), delimiter="\t")
+    headers = rows.fieldnames
     data = []
-    if args.eval_only_target_word:
-        for row in rows:
-            pattern = row["pattern"]
-            sent = row["sent"].split()
-            good_form = row["form"]
-            bad_form = row["form_alt"]
-            target_idx = row["len_prefix"]
-            if args.mask_target:
-                sent[int(target_idx)] = "***mask***"
-            sent = " ".join(sent)
-            data.append((pattern, sent, target_idx, good_form, bad_form))
-    else:
+
+    # If scoring whole sentences, try first reading from an "own" data file.
+    # Otherwise, try to obtain it from a "target-word"-only data file.
+    if not args.eval_target_word and ("sent" in headers
+                                      and "sent_alt" in headers
+                                      and "pattern" in headers):
         for row in rows:
             data.append((row["pattern"], row["sent"], row["sent_alt"]))
+        return data
+
+    for row in rows:
+        pattern = row["pattern"]
+        sent = row["sent"].split(" ")
+        good_form = row["form"]
+        bad_form = row["form_alt"]
+        target_idx = int(row["len_prefix"])
+        if args.eval_target_word:
+            if args.mask_target:
+                sent[target_idx] = "***mask***"
+            sent = " ".join(sent)
+            data.append((pattern, sent, target_idx, good_form, bad_form))
+        else:
+            sent[target_idx] = good_form
+            sent_good = " ".join(sent)
+            sent[target_idx] = bad_form
+            sent_bad = " ".join(sent)
+            data.append((pattern, sent_good, sent_bad))
     return data
 
 
@@ -113,9 +138,9 @@ def read_datafile_original():
             sent = row["sent"].split()
         good_form = row["form"]
         bad_form = next_row["form"]
-        target_idx = row["len_prefix"]
+        target_idx = int(row["len_prefix"])
         if args.mask_target:
-            sent[int(target_idx)] = "***mask***"
+            sent[target_idx] = "***mask***"
         sent = " ".join(sent)
         data.append((row["pattern"], sent, target_idx, good_form, bad_form))
     return data
@@ -127,10 +152,15 @@ def load_model():
     """
     if args.model_name == "lm":
         model_path = "trained_models/hidden650_batch128_dropout0.2_lr20.0.pt"
+    elif "ccg" in args.model_name.lower():
+        model_path = "trained_models/lm_multitask_ccg.pt"
+    elif "pos" in args.model_name.lower():
+        model_path = "trained_models/lm_multitask_pos.pt"
     else:
         raise ValueError("Invalid model name: %s." % args.model_name)
     with open(model_path, "rb") as f:
-        print("Loading the model...")
+        print("Loading the model...", file=sys.stderr)
+        print("model_name = \"%s\"." % model_path, file=sys.stderr)
         if args.cuda:
             model = torch.load(f)
         else:
@@ -151,6 +181,23 @@ def repackage_hidden(hidden):
         return hidden.detach()
     else:
         return tuple(repackage_hidden(v) for v in hidden)
+
+
+def test_get_batch(source, evaluation=False):
+    if isinstance(source, tuple):
+        seq_len = len(source[0]) - 1
+        data = Variable(source[0][:seq_len], volatile=evaluation)
+        target = Variable(source[1][:seq_len], volatile=evaluation)
+
+    else:
+        seq_len = len(source) - 1
+        data = Variable(source[:seq_len], volatile=evaluation)
+        target = Variable(source[1:1 + seq_len].view(-1))
+    # This is where data should be CUDA-fied to lessen OOM errors
+    if args.cuda:
+        return data.cuda(), target.cuda()
+    else:
+        return data, target
 
 
 def evaluate_lm_target_words(data, model, dictionary):
@@ -176,9 +223,10 @@ def evaluate_lm_target_words(data, model, dictionary):
         try:
             word_ids = [dictionary.word2idx[good], dictionary.word2idx[bad]]
         except KeyError:
-            print("Skipping bad wins: %s and %s." % (good, bad))
+            print("Skipping bad wins: %s and %s." % (good, bad), file=sys.stderr)
             continue
         token_tensor = token_ids.view(1, -1).t().contiguous()
+
         output, hidden = model(token_tensor, hidden)
         output_flat = output.view(-1, len(dictionary))  # [sent_len, vocab_size]
         log_probs = F.log_softmax(output_flat).data
@@ -186,18 +234,24 @@ def evaluate_lm_target_words(data, model, dictionary):
 
         # Create mask for the target word.
         mask = [False] * len(token_ids)
-        mask[int(target_idx) - 1] = True
+        mask[target_idx - 1] = True
         mask = array(mask)
 
         # Get scores for the target word.
         log_probs_target = log_probs_np[mask][0]
         scores = [float(x) for x in log_probs_target[word_ids]]
-
-        hidden = repackage_hidden(hidden)
         good_score = scores[0]
         bad_score = scores[1]
+
+        # Identify the maximum prediction token.
+        max_pred_index = argmax(log_probs_target).item()
+        max_pred_token = dictionary.idx2word[max_pred_index]
+
+        hidden = repackage_hidden(hidden)
+
         print(str(good_score > bad_score), pattern,
               good, good_score, bad, bad_score,
+              "max_pred=%s" % max_pred_token,
               sent.encode("utf8"), sep=u"\t")
 
 
@@ -221,9 +275,9 @@ def eval_each_word_in_sentence(token_ids, model, dictionary):
         mask_this_word[i] = True
         log_prob_this_word = float(log_probs_np[mask_this_word][0][word_idx])
         word_scores.append(log_prob_this_word)
-        print(str(dictionary.idx2word[word_idx]),
-              str(i), str(log_prob_this_word), sep="\t")
-    print()
+        if args.print_word_probs:
+            print(str(dictionary.idx2word[word_idx]),
+                  str(i), str(log_prob_this_word), sep="\t")
     return word_scores
 
 
@@ -239,13 +293,17 @@ def evaluate_lm_sentences(data, model, dictionary):
     :param dictionary: based on the vocabulary of the corpus
                        on which the LM has been trained
     """
-    for (pattern, sent, sent_alt) in tqdm(data):
-        print()
-        token_ids = tokenize_sentence(dictionary, sent)
-        token_ids_alt = tokenize_sentence(dictionary, sent_alt)
+    print_at_the_end = ""
+    for (pattern, sent_good, sent_bad) in tqdm(data):
+        if args.print_word_probs:
+            print("\n", "=" * 55)
+        token_ids = tokenize_sentence(dictionary, sent_good)
+        token_ids_alt = tokenize_sentence(dictionary, sent_bad)
 
         word_scores = eval_each_word_in_sentence(
             token_ids, model, dictionary)
+        if args.print_word_probs:
+            print("\n")
         word_scores_alt = eval_each_word_in_sentence(
             token_ids_alt, model, dictionary)
 
@@ -257,10 +315,11 @@ def evaluate_lm_sentences(data, model, dictionary):
         good_score = sum(word_scores)
         bad_score = sum(word_scores_alt)
 
-        print(str(good_score > bad_score), pattern,
-              good_score, bad_score,
-              sent.encode("utf8"),
-              sent_alt.encode("utf8"), sep=u"\t")
+        print_at_the_end += "\t".join([
+            str(good_score > bad_score), pattern,
+            str(good_score), str(bad_score), sent_good, sent_bad]) + "\n"
+
+    print(print_at_the_end)
 
 
 def evaluate_bert(data, bert, tokenizer):
@@ -293,7 +352,7 @@ def evaluate_bert(data, bert, tokenizer):
         try:
             word_ids = tokenizer.convert_tokens_to_ids([good, bad])
         except KeyError:
-            print("Skipping bad wins: %s and %s." % (good, bad))
+            print("Skipping bad wins: %s and %s." % (good, bad), file=sys.stderr)
             continue
         token_tensor = torch.LongTensor(token_ids).unsqueeze(0)
 
@@ -302,17 +361,16 @@ def evaluate_bert(data, bert, tokenizer):
 
         # Get the word probabilities for the target (masked) word.
         probs = F.softmax(logits[0, tok_target_idx], dim=-1)
-
-        # Identify the maximum prediction token.
-        predicted_index = torch.argmax(probs).item()
-        predicted_token = tokenizer.convert_ids_to_tokens([predicted_index])[0]
-
         scores = [float(x) for x in probs[word_ids]]
-
         good_score = scores[0]
         bad_score = scores[1]
+
+        # Identify the maximum prediction token.
+        max_pred_index = torch.argmax(probs).item()
+        max_pred_token = tokenizer.convert_ids_to_tokens([max_pred_index])[0]
+
         print(str(good_score > bad_score), pattern,
-              "MAX_TOKEN=%s" % predicted_token,
+              "max_pred=%s" % max_pred_token,
               good, good_score, bad, bad_score,
               sent.encode("utf8"), sep=u"\t")
 
@@ -326,12 +384,12 @@ def main():
 
     # Load the corpus vocabulary into a dictionary.
     dictionary = Dictionary(args.vocab)
-    print("Vocabulary size = ", len(dictionary))
+    print("Vocabulary size = ", len(dictionary), file=sys.stderr)
 
     # Load and evaluate a pre-trained language model.
     if args.model_name == "lm":
         model = load_model()
-        if args.eval_only_target_word:
+        if args.eval_target_word:
             evaluate_lm_target_words(data, model, dictionary)
         else:
             evaluate_lm_sentences(data, model, dictionary)

@@ -8,6 +8,7 @@ from collections import defaultdict
 
 import logging
 import os
+import sys
 import torch
 
 
@@ -18,7 +19,7 @@ class Dictionary(object):
         self.idx2word = []
         self.word2freq = defaultdict(int)
 
-        vocab_path = os.path.join(path, "vocab.txt")
+        vocab_path = os.path.join(path)
         try:
             vocab = open(vocab_path, encoding="utf8").read()
             self.word2idx = {w: i for i, w in enumerate(vocab.split())}
@@ -34,6 +35,7 @@ class Dictionary(object):
         if word not in self.word2idx:
             self.idx2word.append(word)
             self.word2idx[word] = len(self.idx2word) - 1
+        return self.word2idx[word]
 
     def __len__(self):
         return len(self.idx2word)
@@ -56,7 +58,7 @@ class Corpus(object):
 
 def tokenize(dictionary, path):
     """
-    Tokenizes a text file to a sequence of indices.
+    Tokenize a text file to a sequence of indices.
     We assume that training and test data has <eos> symbols.
     """
     assert os.path.exists(path)
@@ -86,13 +88,14 @@ def tokenize_sentence(dictionary, sentence):
     Tokenize a piece of text and convert it to a sequence of indices.
     """
     words = sentence.split()
-    ntokens = len(words)
-    ids = torch.LongTensor(ntokens)
+    no_tokens = len(words)
+    ids = torch.LongTensor(no_tokens)
     token = 0
     for word in words:
         if word in dictionary.word2idx:
             ids[token] = dictionary.word2idx[word]
         else:
             ids[token] = dictionary.word2idx["<unk>"]
+            print("Word %s not in vocabulary!" % word, file=sys.stderr)
         token += 1
     return ids

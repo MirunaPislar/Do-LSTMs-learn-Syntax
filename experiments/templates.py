@@ -15,13 +15,13 @@ class CoordinationTemplates:
 
             "simple_3NPs_coord_aff":
                 (["PropN1", "COMMA", "PropN2", "AND", "PropN3", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "simple_3NPs_coord_neg":
                 (["PropN1", "COMMA", "PropN2", "AND", "PropN3", "NEG_MOD", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "simple_3NPs_coord_interr":
                 (["INTERR_MOD", "PropN1_lower", "COMMA", "PropN2", "AND", "PropN3", "MV", "QUEST_MARK"],
-                 {"match": ([1, 2, 4], [0]), "vary": []}),
+                 {"match": ([1, 3, 5], [0]), "vary": []}),
 
 
             "first_expanded_2NPs_coord_aff":
@@ -59,35 +59,35 @@ class CoordinationTemplates:
 
             "first_expanded_3NPs_coord_aff":
                 (["ExpNP", "COMMA", "PropN1", "AND", "PropN3", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "first_expanded_3NPs_coord_neg":
                 (["ExpNP", "COMMA", "PropN1", "AND", "PropN3", "NEG_MOD", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "first_expanded_3NPs_coord_interr":
                 (["INTERR_MOD", "ExpNP_lower", "COMMA", "PropN1", "AND", "PropN3", "MV", "QUEST_MARK"],
-                 {"match": ([1, 2, 4], [0]), "vary": []}),
+                 {"match": ([1, 3, 5], [0]), "vary": []}),
 
 
             "last_expanded_3NPs_coord_aff":
                 (["PropN1", "COMMA", "PropN3", "AND", "ExpNP_lower", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "last_expanded_3NPs_coord_neg":
                 (["PropN1", "COMMA", "PropN3", "AND", "ExpNP_lower", "NEG_MOD", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "last_expanded_3NPs_coord_interr":
                 (["INTERR_MOD", "PropN1_lower", "COMMA", "PropN3", "AND", "ExpNP_lower", "MV", "QUEST_MARK"],
-                 {"match": ([1, 2, 4], [0]), "vary": []}),
+                 {"match": ([1, 3, 5], [0]), "vary": []}),
 
 
             "both_expanded_3NPs_coord_aff":
                 (["ExpNP", "COMMA", "ExpNP2", "AND", "PropN3", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "both_expanded_3NPs_coord_neg":
                 (["ExpNP", "COMMA", "ExpNP2", "AND", "PropN3", "NEG_MOD", "MV", "DOT"],
-                 {"match": ([0, 1, 3], [4]), "vary": []}),
+                 {"match": ([0, 2, 4], [5]), "vary": []}),
             "both_expanded_3NPs_coord_interr":
                 (["INTERR_MOD", "ExpNP_lower", "COMMA", "ExpNP2", "AND", "PropN3", "MV", "QUEST_MARK"],
-                 {"match": ([1, 2, 4], [0]), "vary": []}),
+                 {"match": ([1, 3, 5], [0]), "vary": []}),
         }
 
 
