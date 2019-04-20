@@ -94,19 +94,287 @@ class CoordinationTemplates:
 class TenseAgreementTemplates:
     def __init__(self):
         self.rules = {
-            "present_tense_agr_sg_sg_aff":
+
+            #   ****** PRESENT TENSE WITH VERB BE ******
+
+            # Present tense agreement AFFIRMATIVE with the main verb BE.
+            # e.g. Sam is angry , and Fred is too . <eos>
+            "tense_agr_presBe_sg_sg_aff":
+                (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "AND", "NP2_sg", "presBe_sg", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_presBe_sg_pl_aff":
+                (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "AND", "NP2_pl", "presBe_pl", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_presBe_pl_sg_aff":
+                (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "AND", "NP2_sg", "presBe_sg", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_presBe_pl_pl_aff":
+                (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "AND", "NP2_pl", "presBe_pl", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+
+            # Present tense agreement NEGATIVE with the main verb BE.
+            # e.g. Sam is not angry , but Fred is . <eos>
+            "tense_agr_presBe_sg_sg_1neg":
+                (["NP1_sg", "presBe_sg", "NOT", "BE_action", "COMMA", "BUT", "NP2_sg", "presBe_sg", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_presBe_sg_pl_1neg":
+                (["NP1_sg", "presBe_sg", "NOT", "BE_action", "COMMA", "BUT", "NP2_pl", "presBe_pl", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_presBe_pl_sg_1neg":
+                (["NP1_pl", "presBe_pl", "NOT", "BE_action", "COMMA", "BUT", "NP2_sg", "presBe_sg", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_presBe_pl_pl_1neg":
+                (["NP1_pl", "presBe_pl", "NOT", "BE_action", "COMMA", "BUT", "NP2_pl", "presBe_pl", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+
+            # Present tense agreement NEGATIVE with the main verb BE.
+            # e.g. Sam is angry , but Fred is not . <eos>
+            "tense_agr_presBe_sg_sg_2neg":
+                (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "BUT", "NP2_sg", "presBe_sg", "NOT", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_presBe_sg_pl_2neg":
+                (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "BUT", "NP2_pl", "presBe_pl", "NOT", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_presBe_pl_sg_2neg":
+                (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "BUT", "NP2_sg", "presBe_sg", "NOT", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_presBe_pl_pl_2neg":
+                (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "BUT", "NP2_pl", "presBe_pl", "NOT", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+
+            #   ****** PAST TENSE ******
+
+            # Past tense agreement AFFIRMATIVE.
+            # e.g. Sam laughed , and Fred did too . <eos>
+            "tense_agr_past_sg_sg_aff":
+                (["NP1_sg", "PAST_action", "COMMA", "AND", "NP2_sg", "DID_past_sg", "TOO", "DOT"],
+                 {"match": ([4], [5]), "vary": []}),
+            "tense_agr_past_sg_pl_aff":
+                (["NP1_sg", "PAST_action", "COMMA", "AND", "NP2_pl", "DID_past_pl", "TOO", "DOT"],
+                 {"match": ([4], [5]), "vary": []}),
+            "tense_agr_past_pl_sg_aff":
+                (["NP1_pl", "PAST_action", "COMMA", "AND", "NP2_sg", "DID_past_sg", "TOO", "DOT"],
+                 {"match": ([4], [5]), "vary": []}),
+            "tense_agr_past_pl_pl_aff":
+                (["NP1_pl", "PAST_action", "COMMA", "AND", "NP2_pl", "DID_past_pl", "TOO", "DOT"],
+                 {"match": ([4], [5]), "vary": []}),
+
+            # Past tense agreement NEGATIVE.
+            # e.g. Sam did not laugh , but Fred did . <eos>
+            "tense_agr_past_sg_sg_neg":
+                (["NP1_sg", "DID_past_sg", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_sg", "DID_past_sg", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_past_sg_pl_neg":
+                (["NP1_sg", "DID_past_sg", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_pl", "DID_past_pl", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_past_pl_sg_neg":
+                (["NP1_pl", "DID_past_pl", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_sg", "DID_past_sg", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_past_pl_pl_neg":
+                (["NP1_pl", "DID_past_pl", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_pl", "DID_past_pl", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+
+
+            #   ****** FUTURE TENSE ******
+
+            # Future tense agreement AFFIRMATIVE.
+            # e.g. Sam will laugh , and Fred will too . <eos>
+            "tense_agr_future_sg_sg_aff":
+                (["NP1_sg", "WILL_future_sg", "INFINITIVE_action", "COMMA", "AND", "NP2_sg", "WILL_future_sg", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_future_sg_pl_aff":
+                (["NP1_sg", "WILL_future_sg", "INFINITIVE_action", "COMMA", "AND", "NP2_pl", "WILL_future_pl", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_future_pl_sg_aff":
+                (["NP1_pl", "WILL_future_pl", "INFINITIVE_action", "COMMA", "AND", "NP2_sg", "WILL_future_sg", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+            "tense_agr_future_pl_pl_aff":
+                (["NP1_pl", "WILL_future_pl", "INFINITIVE_action", "COMMA", "AND", "NP2_pl", "WILL_future_pl", "TOO", "DOT"],
+                 {"match": ([5], [6]), "vary": []}),
+
+            # Future tense agreement NEGATIVE.
+            # e.g. Sam will not laugh , but Fred will . <eos>
+            "tense_agr_future_sg_sg_neg":
+                (["NP1_sg", "WILL_future_sg", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_sg", "WILL_future_sg", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_future_sg_pl_neg":
+                (["NP1_sg", "WILL_future_sg", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_pl", "WILL_future_pl", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_future_pl_sg_neg":
+                (["NP1_pl", "WILL_future_pl", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_sg", "WILL_future_sg", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+            "tense_agr_future_pl_pl_neg":
+                (["NP1_pl", "WILL_future_pl", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_pl", "WILL_future_pl", "DOT"],
+                 {"match": ([6], [7]), "vary": []}),
+
+
+            # =============================================================================
+
+            # TEMPLATES WITH INVERSION
+
+            # =============================================================================
+
+
+            #   ****** PRESENT TENSE WITH VERB BE ******
+
+            # Present tense agreement AFFIRMATIVE with the main verb BE and INVERSION.
+            # e.g. Sam is angry , and so is Fred . <eos>
+            "tense_agr_with_inv_presBe_sg_sg_aff":
                 (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "AND_aff", "presBe_sg", "NP2_sg", "DOT"],
-                 {"match": ([0], [5]), "vary": []}),
-            "present_tense_agr_sg_pl_aff":
+                 {"match": ([6], [5]), "vary": []}),
+            "tense_agr_with_inv_presBe_sg_pl_aff":
                 (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "AND_aff", "presBe_pl", "NP2_pl", "DOT"],
-                 {"match": ([0], [5]), "vary": []}),
-            "present_tense_agr_pl_sg_aff":
+                 {"match": ([6], [5]), "vary": []}),
+            "tense_agr_with_inv_presBe_pl_sg_aff":
                 (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "AND_aff", "presBe_sg", "NP2_sg", "DOT"],
-                 {"match": ([0], [5]), "vary": []}),
-            "present_tense_agr_pl_pl_aff":
+                 {"match": ([6], [5]), "vary": []}),
+            "tense_agr_with_inv_presBe_pl_pl_aff":
                 (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "AND_aff", "presBe_pl", "NP2_pl", "DOT"],
-                 {"match": ([0], [5]), "vary": []}),
-            "present_tense_agr_sg_sg_neg":
+                 {"match": ([6], [5]), "vary": []}),
+
+            # Present tense agreement NEGATIVE with the main verb BE and INVERSION.
+            # e.g. Sam is not angry , and neither is Fred . <eos>
+            "tense_agr_with_inv_presBe_sg_sg_neg":
                 (["NP1_sg", "presBe_sg", "NOT", "BE_action", "COMMA", "AND_neg", "presBe_sg", "NP2_sg", "DOT"],
-                 {"match": ([0], [6]), "vary": []}),
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_presBe_sg_pl_neg":
+                (["NP1_sg", "presBe_sg", "NOT", "BE_action", "COMMA", "AND_neg", "presBe_pl", "NP2_pl", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_presBe_pl_sg_neg":
+                (["NP1_pl", "presBe_pl", "NOT", "BE_action", "COMMA", "AND_neg", "presBe_sg", "NP2_sg", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_presBe_pl_pl_neg":
+                (["NP1_pl", "presBe_pl", "NOT", "BE_action", "COMMA", "AND_neg", "presBe_pl", "NP2_pl", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+
+            #   ****** PAST TENSE ******
+
+            # Past tense agreement AFFIRMATIVE with INVERSION.
+            # e.g. Sam laughed , and so did Fred . <eos>
+            "tense_agr_with_inv_past_sg_sg_aff":
+                (["NP1_sg", "PAST_action", "COMMA", "AND_aff", "DID_past_sg", "NP2_sg", "DOT"],
+                 {"match": ([5], [4]), "vary": []}),
+            "tense_agr_with_inv_past_sg_pl_aff":
+                (["NP1_sg", "PAST_action", "COMMA", "AND_aff", "DID_past_pl", "NP2_pl", "DOT"],
+                 {"match": ([5], [4]), "vary": []}),
+            "tense_agr_with_inv_past_pl_sg_aff":
+                (["NP1_pl", "PAST_action", "COMMA", "AND_aff", "DID_past_sg", "NP2_sg", "DOT"],
+                 {"match": ([5], [4]), "vary": []}),
+            "tense_agr_with_inv_past_pl_pl_aff":
+                (["NP1_pl", "PAST_action", "COMMA", "AND_aff", "DID_past_pl", "NP2_pl", "DOT"],
+                 {"match": ([5], [4]), "vary": []}),
+
+            # Past tense agreement NEGATIVE with INVERSION.
+            # e.g. Sam did not laugh , and neither did Fred . <eos>
+            "tense_agr_with_inv_past_sg_sg_neg":
+                (["NP1_sg", "DID_past_sg", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "DID_past_sg", "NP2_sg", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_past_sg_pl_neg":
+                (["NP1_sg", "DID_past_sg", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "DID_past_pl", "NP2_pl", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_past_pl_sg_neg":
+                (["NP1_pl", "DID_past_pl", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "DID_past_sg", "NP2_sg", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_past_pl_pl_neg":
+                (["NP1_pl", "DID_past_pl", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "DID_past_pl", "NP2_pl", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+
+
+            #   ****** FUTURE TENSE ******
+
+            # Future tense agreement AFFIRMATIVE with INVERSION.
+            # e.g. Sam will laugh , and so will Fred . <eos>
+            "tense_agr_with_inv_future_sg_sg_aff":
+                (["NP1_sg", "WILL_future_sg", "INFINITIVE_action", "COMMA", "AND_aff", "WILL_future_sg", "NP2_sg", "DOT"],
+                 {"match": ([6], [5]), "vary": []}),
+            "tense_agr_with_inv_future_sg_pl_aff":
+                (["NP1_sg", "WILL_future_sg", "INFINITIVE_action", "COMMA", "AND_aff", "WILL_future_pl", "NP2_pl", "DOT"],
+                 {"match": ([6], [5]), "vary": []}),
+            "tense_agr_with_inv_future_pl_sg_aff":
+                (["NP1_pl", "WILL_future_pl", "INFINITIVE_action", "COMMA", "AND_aff", "WILL_future_sg", "NP2_sg", "DOT"],
+                 {"match": ([6], [5]), "vary": []}),
+            "tense_agr_with_inv_future_pl_pl_aff":
+                (["NP1_pl", "WILL_future_pl", "INFINITIVE_action", "COMMA", "AND_aff", "WILL_future_pl", "NP2_pl", "DOT"],
+                 {"match": ([6], [5]), "vary": []}),
+
+            # Future tense agreement NEGATIVE with INVERSION.
+            # e.g. Sam did not laugh , and neither did Fred . <eos>
+            "tense_agr_with_inv_future_sg_sg_neg":
+                (["NP1_sg", "WILL_future_sg", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "WILL_future_sg", "NP2_sg", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_future_sg_pl_neg":
+                (["NP1_sg", "WILL_future_sg", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "WILL_future_pl", "NP2_pl", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_future_pl_sg_neg":
+                (["NP1_pl", "WILL_future_pl", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "WILL_future_sg", "NP2_sg", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+            "tense_agr_with_inv_future_pl_pl_neg":
+                (["NP1_pl", "WILL_future_pl", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "WILL_future_pl", "NP2_pl", "DOT"],
+                 {"match": ([7], [6]), "vary": []}),
+
+            # =============================================================================
+
+            # TEMPLATES FOR TAGS
+
+            # =============================================================================
+
+            #   ****** PRESENT TENSE ******
+
+            # Present tense agreement AFFIRMATIVE with the main verb BE.
+            # e.g. Sam is angry , is n't he ? <eos>
+            "tense_agr_tags_presBe_sg_aff":
+                (["NP1_sg", "presBe_sg", "BE_action", "COMMA", "presBe_sg", "NT", "HE", "QUEST_MARK"],
+                 {"match": ([0], [4]), "vary": []}),
+            "tense_agr_tags_presBe_pl_aff":
+                (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "presBe_pl", "NT", "THEY", "QUEST_MARK"],
+                 {"match": ([0], [4]), "vary": []}),
+
+            # Present tense agreement NEGATIVE with the main verb BE.
+            # e.g. Sam is n't angry , is he ? <eos>
+            "tense_agr_tags_presBe_sg_neg":
+                (["NP1_sg", "presBe_sg", "NT", "BE_action", "COMMA", "presBe_sg", "HE", "QUEST_MARK"],
+                 {"match": ([0], [5]), "vary": []}),
+            "tense_agr_tags_presBe_pl_neg":
+                (["NP1_pl", "presBe_pl", "NT", "BE_action", "COMMA", "presBe_pl", "THEY", "QUEST_MARK"],
+                 {"match": ([0], [5]), "vary": []}),
+
+            #   ****** PAST TENSE ******
+
+            # Past tense agreement AFFIRMATIVE.
+            # e.g. Sam laughed , did n't he ? <eos>
+            "tense_agr_tags_past_sg_aff":
+                (["NP1_sg", "PAST_action", "COMMA", "DID_past_sg", "NT", "HE", "QUEST_MARK"],
+                 {"match": ([0], [3]), "vary": []}),
+            "tense_agr_tags_past_pl_aff":
+                (["NP1_pl", "PAST_action", "COMMA", "DID_past_pl", "NT", "THEY", "QUEST_MARK"],
+                 {"match": ([0], [3]), "vary": []}),
+
+            # Past tense agreement NEGATIVE.
+            # e.g. Sam did n't laugh , did he ? <eos>
+            "tense_agr_tags_past_sg_neg":
+                (["NP1_sg", "DID_past_sg", "NT", "INFINITIVE_action", "COMMA", "DID_past_sg", "HE", "QUEST_MARK"],
+                 {"match": ([0], [5]), "vary": []}),
+            "tense_agr_tags_past_pl_neg":
+                (["NP1_pl", "DID_past_pl", "NT", "INFINITIVE_action", "COMMA", "DID_past_pl", "THEY", "QUEST_MARK"],
+                 {"match": ([0], [5]), "vary": []}),
+
+            #   ****** FUTURE TENSE ******
+
+            # Future tense agreement AFFIRMATIVE.
+            # e.g. Sam will laugh , will n't he ? <eos>
+            "tense_agr_tags_future_sg_aff":
+                (["NP1_sg", "WILL_future_sg", "INFINITIVE_action", "COMMA", "WILL_future_sg", "NT", "HE", "QUEST_MARK"],
+                 {"match": ([0], [4]), "vary": []}),
+            "tense_agr_tags_future_pl_aff":
+                (["NP1_pl", "WILL_future_pl", "INFINITIVE_action", "COMMA", "WILL_future_pl", "NT", "THEY", "QUEST_MARK"],
+                 {"match": ([0], [4]), "vary": []}),
+
+            # Future tense agreement NEGATIVE.
+            # e.g. Sam will n't laugh , will he ? <eos>
+            "tense_agr_tags_future_sg_neg":
+                (["NP1_sg", "WILL_future_sg", "NT", "INFINITIVE_action", "COMMA", "WILL_future_sg", "HE", "QUEST_MARK"],
+                 {"match": ([0], [5]), "vary": []}),
+            "tense_agr_tags_future_pl_neg":
+                (["NP1_pl", "WILL_future_pl", "NT", "INFINITIVE_action", "COMMA", "WILL_future_pl", "THEY", "QUEST_MARK"],
+                 {"match": ([0], [5]), "vary": []}),
         }

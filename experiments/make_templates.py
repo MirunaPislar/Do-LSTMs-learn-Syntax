@@ -26,31 +26,19 @@ class MakeAgreementTemplate:
         elif args.type == "tense":
             self.terminals = TenseAgreementTerminals().terminals
             self.rules = TenseAgreementTemplates().rules
-        self.verbs_of_tense = {
-            "presBe": ["is", "are"],
-            "pres": ["does", "do"],
-            "presCont": ["has", "have"],
-            "future": ["will"],
-            "past": ["did", "had"],
-            "pastCont": ["was", "were"]}
-        self.verbs_of_number = {
-            "sg": ["is", "was", "does", "did", "has", "will", "had"],
-            "pl": ["are", "were", "do", "did", "have", "will", "had"]}
 
     def switch_tense(self, words, preterms_idx):
+        valid_verb_switches = {
+            "presBe": {"sg": ["will", "did", "has"], "pl": ["will", "did", "have"]},
+            "past": {"sg": ["is", "was"], "pl": ["are", "were"]},
+            "future": {"sg": ["is"], "pl": ["are"]},
+        }
+
         new_words = []
         my_number = preterms_idx.split("_")[-1]
         my_tense = preterms_idx.split("_")[-2]
+        valid_verbs = valid_verb_switches[my_tense][my_number]
 
-        possible_verbs = self.verbs_of_number[my_number]
-        valid_verbs = []
-        for tense, verbs in self.verbs_of_tense.items():
-            if tense == my_tense:
-                continue
-            for verb in verbs:
-                if verb in possible_verbs:
-                    valid_verbs.append(verb)
-        random.shuffle(valid_verbs)
         for word in words:
             splits = word.split()
             sampled_verb = random.choice(valid_verbs)
