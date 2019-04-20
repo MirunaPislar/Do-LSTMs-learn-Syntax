@@ -1,0 +1,184 @@
+pattern	form	form_alt	len_prefix	sent
+semantics	barks	bark	5	The dog in the neighbourhood barks at night . <eos>
+semantics	barks	bark	5	The cat in the neighbourhood barks at night . <eos>
+semantics	sits	sit	2	The cat sits on the mat . <eos>
+semantics	cat	dog	1	The cat sat on the mat . <eos>
+semantics	bark	barks	5	The dogs in the neighbourhood bark at night . <eos>
+semantics	bark	barks	5	The cats in the neighbourhood bark at night . <eos>
+semantics	dog	cat	1	The dog in the neighbourhood barks at night . <eos>
+semantics	dogs	cats	1	The dogs in the neighbourhood bark at night . <eos>
+semantics	sit	bark	5	The cats in the neighbourhood sit on the mat . <eos>
+semantics	sit	bark	5	The cats in the neighbourhood sit at night . <eos>
+semantics	bark	sit	5	The dogs in the neighbourhood bark at night . <eos>
+semantics	boy	girl	1	The boy shaved himself . <eos>
+semantics	girl	boy	1	The girl shaved herself . <eos>
+semantics	himself	herself	3	The boy shaved himself . <eos>
+semantics	herself	himself	3	The girl shaved herself . <eos>
+semantics	his	her	3	The boy shaved his legs . <eos>
+semantics	his	her	3	The boy shaved his beard . <eos>
+semantics	her	his	3	The girl shaved her legs . <eos>
+semantics	her	his	3	The girl shaved her beard . <eos>
+semantics	she	he	11	The actress who performed last night had a car accident and she has been urgently transported to the hospital . <eos>
+semantics	she	he	8	We saw the actress in the hospital because she had a car accident yesterday . <eos>
+semantics	he	she	8	We saw the actor in the hospital because he had a car accident yesterday . <eos>
+semantics	her	him	10	The actress gave an impressive performance and people loudly acclaimed her .  <eos>
+semantics	him	her	10	The actor gave an impressive performance and people loudly acclaimed him .  <eos>
+anaphora	it	she	5	She dropped the plate and it shattered loudly . <eos>
+anaphora	it	she	5	Mary dropped the plate and it shattered loudly . <eos>
+anaphora	she	it	5	She dropped the plate and she cried loudly . <eos>
+anaphora	cried	shattered	6	She dropped the plate and she cried loudly . <eos>
+anaphora	shattered	cried	6	She dropped the plate and it shattered loudly . <eos>
+anaphora	so	neither	5	He was angry , and so was I . <eos>
+anaphora	neither	so	6	He was not angry , and neither was I . <eos>
+anaphora	so	neither	5	She was angry , and so were you . <eos>
+anaphora	neither	so	6	She was not angry , and neither were you . <eos>
+anaphora	it	him	10	If he buys a new bike , I will do it as well . <eos>
+anaphora	one	two	10	If he buys a new bike , I will buy one as well . <eos>
+anaphora	one	it	10	If he buys a new bike , I will buy one as well . <eos>
+anaphora	did	washed	7	He washed the dishes , and she did too . <eos>
+anaphora	did	washed	7	He washed the dishes , and she did too . <eos>
+anaphora	will	did	7	She will not laugh , but he will . <eos>
+anaphora	will	did	7	She will n't laugh , but he will . <eos>
+anaphora	did	will	7	She did not laugh , but he did . <eos>
+anaphora	did	will	7	She did n't laugh , but he did . <eos>
+anaphora	not	too	7	She will laugh , but he will not . <eos>
+anaphora	too	not	7	She will laugh , and he will too . <eos>
+anaphora	do	will	8	The people who say they will help never do . <eos>
+anaphora	do	go	8	The people who say they will help never do . <eos>
+anaphora	do	did	8	The people who say they will help never do . <eos>
+anaphora	do	done	8	The people who say they will help never do . <eos>
+anaphora	has	was	7	She has been cheating , and Fred has too . <eos>
+anaphora	will	did	8	If they go to the pub , I will go too . <eos>
+anaphora	not	go	11	If they do n't go to the pub , I will not too . <eos>
+anaphora	does	was	4	He likes beer , does n't he ? <eos>
+anaphora	does	will	4	He likes beer , does n't he ? <eos>
+anaphora	does	did	4	He likes beer , does n't he ? <eos>
+anaphora	does	is	4	He likes beer , does n't he ? <eos>
+anaphora	is	does	4	He is sick , is n't he ? <eos>
+anaphora	is	will	4	He is sick , is n't he ? <eos>
+anaphora	is	was	4	He is sick , is n't he ? <eos>
+anaphora	does	is	5	She likes modern art , does n't she ? <eos>
+anaphora	does	did	5	She likes modern art , does n't she ? <eos>
+anaphora	does	can	5	She likes modern art , does n't she ? <eos>
+anaphora	does	must	5	She likes modern art , does n't she ? <eos>
+anaphora	?	.	8	She likes modern art , does n't she ? <eos>
+anaphora	does	is	7	She does n't like modern art , does she ? <eos>
+cataphora	he	it	1	Because he was very cold , David put on his coat . <eos>
+cataphora	he	it	1	Because he was very cold , he put on his coat . <eos>
+cataphora	he	it	6	David put on his coat because he was very cold . <eos>
+cataphora	he	it	6	He put on his coat because he was very cold . <eos>
+cataphora	Although	Because	0	Although Sam might do so , I will not buy a new bike . <eos>
+cataphora	not	also	8	Although Sam might do so , I will not buy a new bike . <eos>
+cataphora	Because	Although	0	Because Sam might do so , I will buy a new bike . <eos>
+cataphora	also	not	8	Because Sam might do so , I will also buy a new bike . <eos>
+cataphora	their	his	1	In their free time , the kids play video games . <eos>
+cataphora	their	her	1	In their free time , the kids play video games . <eos>
+anaphora	that	he	5	The music stopped , and that upset everyone . <eos>
+anaphora	They	He	11	Only a few of the children ate their ice cream . They ate the strawberry flavor first . <eos>
+anaphora	They	He	11	Only a few of the children ate their ice cream . They ate the strawberry flavor first . <eos>
+anaphora	They	He	11	Only a few of the children ate their ice cream . They ate the strawberry flavor first . <eos>
+anaphora	His	Her	0	His friends have been criticizing Jim for exaggerating . <eos>
+anaphora	His	Their	0	His friends have been criticizing Jim for exaggerating . <eos>
+anaphora	Her	His	0	Her friends have been criticizing Jane for exaggerating . <eos>
+anaphora	Jane	Jim	5	Her friends have been criticizing Jane for exaggerating . <eos>
+anaphora	Jim	Jane	5	His friends have been criticizing Jim for exaggerating . <eos>
+punctuation	?	.	5	What are you doing here ? <eos>
+punctuation	?	,	5	What are you doing here ? <eos>
+question	What	Which	0	What are you doing here ? <eos>
+question	What	Where	0	What are you doing here ? <eos>
+question	What	When	0	What are you doing here ? <eos>
+question	What	Where	0	What are you doing here ? <eos>
+question	What	How	0	What are you doing here ? <eos>
+punctuation	?	.	3	How are you ? <eos>
+punctuation	?	.	4	Who walked the dog ? <eos>
+question	Who	What	0	What walked the dog ? <eos>
+punctuation	?	.	5	So whom did you call ? <eos>
+question	whom	who	1	So whom did you call ? <eos>
+punctuation	?	.	6	What did you try to do ? <eos>
+question	When	What	0	When did they arrive ? <eos>
+punctuation	...	.	4	It is not cold ... it is freezing cold . <eos>
+punctuation	...	,	4	It is not cold ... it is freezing cold . <eos>
+punctuation	...	=	4	It is not cold ... it is freezing cold . <eos>
+punctuation	...	:	4	It is not cold ... it is freezing cold . <eos>
+punctuation	...	--	4	It is not cold ... it is freezing cold . <eos>
+punctuation	--	.	4	It is not cold -- it is freezing cold . <eos>
+punctuation	--	;	4	It is not cold -- it is freezing cold . <eos>
+punctuation	-	.	4	It is not cold - it is freezing cold . <eos>
+punctuation	-	;	4	It is not cold - it is freezing cold . <eos>
+punctuation	...	;	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>
+punctuation	...	,	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>
+punctuation	...	.	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>
+punctuation	...	-	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>
+punctuation	...	--	9	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>
+coordination	go	goes	3	Sarah and Jane go to town . <eos>
+coordination	take	takes	6	Sarah and the boy she likes take dancing classes together . <eos>
+coordination	take	takes	6	Sarah and the boy we like take dancing classes together . <eos>
+coordination	take	takes	7	Sarah and the boy her parents like take dancing classes together . <eos>
+coordination	sleep	sleeps	10	Tom and the girl we met yesterday in the pub sleep together . <eos>
+coordination	sleep	sleeps	6	Tom and the girl he dates sleep together . <eos>
+coordination	sleep	sleeps	8	Tom and the girl from the French class sleep together . <eos>
+coordination	sleep	sleeps	12	The guy from the French class and the girl he dates sleep together . <eos>
+coordination	sleep	sleeps	13	The guy from the French class and the girl from the canto lessons sleep together . <eos>
+coordination	sleep	sleeps	19	Tim ( the guy from the French class ) and Sarah ( the girl from the canto lessons ) sleep together . <eos>
+coordination	sleep	sleeps	19	Tim , the guy from the French class , and Sarah , the girl from the canto lessons , sleep together . <eos>
+coordination	go	goes	13	The guy in the basketball team and the girl from the French class go on a date . <eos>
+coordination	go	goes	19	Tom ( the guy in the basketball team ) and Jane ( the girl from the French class ) go on a date . <eos>
+coordination	go	goes	19	Tom , the guy in the basketball team , and Jane , the girl from the French class , go on a date . <eos>
+coordination	do	does	3	Sarah and Jane do n't go to town . <eos>
+coordination	like	likes	3	Sarah and Jane like ice cream . <eos>
+coordination	do	does	3	Sarah and Jane do n't like ice cream . <eos>
+coordination	Do	Does	0	Do Jim and Tom drink a beer every night together ? <eos>
+coordination	Do	Does	0	Do Jim and the boys drink a beer every night together ? <eos>
+coordination	Do	Does	0	Do the boys and Jane drink a beer every night together ? <eos>
+coordination	Do	Does	0	Do the boys drink a beer every night together ? <eos>
+coordination	Do	Does	0	Do they drink a beer every night together ? <eos>
+coordination	drink	drinks	4	Do Jim and Tom drink a beer every night together ? <eos>
+punctuation	?	.	10	Do Jim and Tom drink a beer every night together ? <eos>
+coordination	go	goes	5	The chicken and the rice go well together . <eos>
+coordination	understand	understands	3	The president will understand and agree . <eos>
+coordination	agree	agrees	5	The president will understand and agree . <eos>
+coordination	agrees	agree	4	The president understands and agrees . <eos>
+coordination	agree	agrees	7	The president will understand the criticism and agree . <eos>
+coordination	take	takes	7	The president will understand the criticism and take action . <eos>
+coordination	take	takes	7	The president will understand the criticism and take action . <eos>
+coordination	takes	take	6	The president understands the criticism and takes action . <eos>
+coordination	take	takes	10	We think that the president will understand the criticism and take action . <eos>
+coordination	take	takes	10	She thinks that the president will understand the criticism and take action . <eos>
+coordination	forces	force	4	Susan asks you but forces me to read the book on syntax . <eos>
+coordination	forces	force	12	Susan asks you about the movie you have seen last night but forces me to read the book on syntax . <eos>
+coordination	force	forces	4	They ask her but force me to read the book on syntax . <eos>
+coordination	force	forces	4	They asks her but force me to read the book on syntax . <eos>
+coordination	carefully	careful	4	Susan works slowly and carefully . <eos>
+anaphora	her	it	14	Susan has such a complex personality , I do not even try to understand her . <eos>
+anaphora	her	it	10	Susan has such a complex personality , I cannot understand her . <eos>
+anaphora	it	her	11	Susan has such a complex personality . Stop trying to understand it ! <eos>
+anaphora	her	it	14	Susan is such a complicated person , I do not even try to understand her . <eos>
+anaphora	her	it	10	Susan is such a complicated person , I cannot understand her . <eos>
+anaphora	her	it	10	Susan has a complex personality . Stop trying to understand her ! <eos>
+anaphora	her	it	14	She has such a complex personality , I do not even try to understand her . <eos>
+anaphora	her	it	10	She has such a complex personality , I cannot understand her . <eos>
+anaphora	it	her	11	She has such a complex personality . Stop trying to understand it ! <eos>
+anaphora	her	it	14	She is such a complicated person , I do not even try to understand her . <eos>
+anaphora	her	it	10	She is such a complicated person , I cannot understand her . <eos>
+anaphora	her	it	10	She has a complex personality . Stop trying to understand her ! <eos>
+semantics	her	his	5	I have a daughter and her name is Maria . <eos>
+semantics	her	its	5	I have a daughter and her name is Maria . <eos>
+semantics	their	her	8	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>
+semantics	their	his	8	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>
+semantics	his	her	16	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>
+semantics	his	its	16	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>
+semantics	their	her	15	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>
+semantics	their	his	15	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>
+semantics	Jim	Susan	15	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>
+semantics	Jim	Sarah	15	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>
+semantics	Jim	Maria	15	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>
+semantics	Jane	Jim	15	I have two daughters and a son : their names are Tom , Maria and Jane . <eos>
+semantics	Jane	Tom	7	I have two daughters : Maria and Jane . <eos>
+generic_antecedent	they	she	6	All people get hungry , so they eat . <eos>
+generic_antecedent	they	she	6	All people get hungry , so they eats . <eos>
+valency	makes	make	3	Winning the prize makes our training worthwhile . <eos>
+tense	makes	made	3	Winning the prize makes our training worthwhile . <eos>
+valency	does	do	4	That they come late does not surprise us . <eos>
+valency	surprises	surprise	4	That they come late surprises us . <eos>
+tense	contribute	contributes	4	Sam persuaded us to contribute to the cause . <eos>
+valency	upsets	upset	6	That she would veto this bill upsets us . <eos>
