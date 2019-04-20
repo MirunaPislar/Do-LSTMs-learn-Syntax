@@ -1,0 +1,183 @@
+False	semantics	-49.14917278289795	-48.88078212738037	The dog in the neighbourhood barks at night . <eos>	The dog in the neighbourhood bark at night . <eos>
+False	semantics	-49.28693103790283	-48.94283580780029	The cat in the neighbourhood barks at night . <eos>	The cat in the neighbourhood bark at night . <eos>
+True	semantics	-31.594223022460938	-32.60978031158447	The cat sits on the mat . <eos>	The cat sit on the mat . <eos>
+False	semantics	-30.34068775177002	-30.340044021606445	The cat sat on the mat . <eos>	The dog sat on the mat . <eos>
+True	semantics	-47.77390146255493	-49.37876844406128	The dogs in the neighbourhood bark at night . <eos>	The dogs in the neighbourhood barks at night . <eos>
+True	semantics	-46.92114019393921	-49.27640771865845	The cats in the neighbourhood bark at night . <eos>	The cats in the neighbourhood barks at night . <eos>
+True	semantics	-49.14917278289795	-49.28693103790283	The dog in the neighbourhood barks at night . <eos>	The cat in the neighbourhood barks at night . <eos>
+False	semantics	-47.77390146255493	-46.92114019393921	The dogs in the neighbourhood bark at night . <eos>	The cats in the neighbourhood bark at night . <eos>
+True	semantics	-44.81441259384155	-52.2738995552063	The cats in the neighbourhood sit on the mat . <eos>	The cats in the neighbourhood bark on the mat . <eos>
+True	semantics	-42.4053635597229	-46.92114019393921	The cats in the neighbourhood sit at night . <eos>	The cats in the neighbourhood bark at night . <eos>
+False	semantics	-47.77390146255493	-42.65205907821655	The dogs in the neighbourhood bark at night . <eos>	The dogs in the neighbourhood sit at night . <eos>
+True	semantics	-29.652791023254395	-31.563831329345703	The boy shaved himself . <eos>	The girl shaved himself . <eos>
+True	semantics	-30.440190315246582	-32.09150981903076	The girl shaved herself . <eos>	The boy shaved herself . <eos>
+True	semantics	-29.652791023254395	-32.09150981903076	The boy shaved himself . <eos>	The boy shaved herself . <eos>
+True	semantics	-30.440190315246582	-31.563831329345703	The girl shaved herself . <eos>	The girl shaved himself . <eos>
+True	semantics	-32.25132179260254	-34.41980457305908	The boy shaved his legs . <eos>	The boy shaved her legs . <eos>
+True	semantics	-28.190805435180664	-31.247825622558594	The boy shaved his beard . <eos>	The boy shaved her beard . <eos>
+True	semantics	-33.47854232788086	-34.50565719604492	The girl shaved her legs . <eos>	The girl shaved his legs . <eos>
+False	semantics	-30.182711601257324	-30.09000587463379	The girl shaved her beard . <eos>	The girl shaved his beard . <eos>
+True	semantics	-88.03298091888428	-89.71432781219482	The actress who performed last night had a car accident and she has been urgently transported to the hospital . <eos>	The actress who performed last night had a car accident and he has been urgently transported to the hospital . <eos>
+True	semantics	-61.707173347473145	-62.509117126464844	We saw the actress in the hospital because she had a car accident yesterday . <eos>	We saw the actress in the hospital because he had a car accident yesterday . <eos>
+True	semantics	-60.13026809692383	-63.27226543426514	We saw the actor in the hospital because he had a car accident yesterday . <eos>	We saw the actor in the hospital because she had a car accident yesterday . <eos>
+True	semantics	-64.67749118804932	-64.83969783782959	The actress gave an impressive performance and people loudly acclaimed her .  <eos>	The actress gave an impressive performance and people loudly acclaimed him .  <eos>
+True	semantics	-62.58605766296387	-65.04077243804932	The actor gave an impressive performance and people loudly acclaimed him .  <eos>	The actor gave an impressive performance and people loudly acclaimed her .  <eos>
+True	anaphora	-51.84237098693848	-52.85623836517334	She dropped the plate and it shattered loudly . <eos>	She dropped the plate and she shattered loudly . <eos>
+True	anaphora	-54.246474266052246	-55.80079364776611	Mary dropped the plate and it shattered loudly . <eos>	Mary dropped the plate and she shattered loudly . <eos>
+True	anaphora	-41.406240463256836	-44.842514991760254	She dropped the plate and she cried loudly . <eos>	She dropped the plate and it cried loudly . <eos>
+True	anaphora	-41.406240463256836	-52.85623836517334	She dropped the plate and she cried loudly . <eos>	She dropped the plate and she shattered loudly . <eos>
+False	anaphora	-51.84237098693848	-44.842514991760254	She dropped the plate and it shattered loudly . <eos>	She dropped the plate and it cried loudly . <eos>
+False	anaphora	-40.83149814605713	-38.09943437576294	He was angry , and so was I . <eos>	He was angry , and neither was I . <eos>
+True	anaphora	-39.9532675743103	-43.46216106414795	He was not angry , and neither was I . <eos>	He was not angry , and so was I . <eos>
+False	anaphora	-39.9230432510376	-37.88286542892456	She was angry , and so were you . <eos>	She was angry , and neither were you . <eos>
+True	anaphora	-40.04703903198242	-42.8992280960083	She was not angry , and neither were you . <eos>	She was not angry , and so were you . <eos>
+True	anaphora	-44.30492353439331	-49.607078075408936	If he buys a new bike , I will do it as well . <eos>	If he buys a new bike , I will do him as well . <eos>
+True	anaphora	-52.87709379196167	-53.81022071838379	If he buys a new bike , I will buy one as well . <eos>	If he buys a new bike , I will buy two as well . <eos>
+False	anaphora	-52.87709379196167	-46.59137010574341	If he buys a new bike , I will buy one as well . <eos>	If he buys a new bike , I will buy it as well . <eos>
+True	anaphora	-48.71764898300171	-50.87389421463013	He washed the dishes , and she did too . <eos>	He washed the dishes , and she washed too . <eos>
+True	anaphora	-48.71764898300171	-50.87389421463013	He washed the dishes , and she did too . <eos>	He washed the dishes , and she washed too . <eos>
+False	anaphora	-35.46394729614258	-34.62643337249756	She will not laugh , but he will . <eos>	She will not laugh , but he did . <eos>
+False	anaphora	-37.71572780609131	-36.78732490539551	She will n't laugh , but he will . <eos>	She will n't laugh , but he did . <eos>
+True	anaphora	-29.37157154083252	-37.02378749847412	She did not laugh , but he did . <eos>	She did not laugh , but he will . <eos>
+True	anaphora	-29.084075927734375	-36.31174278259277	She did n't laugh , but he did . <eos>	She did n't laugh , but he will . <eos>
+True	anaphora	-34.29431438446045	-40.022560119628906	She will laugh , but he will not . <eos>	She will laugh , but he will too . <eos>
+False	anaphora	-41.2739839553833	-35.87639808654785	She will laugh , and he will too . <eos>	She will laugh , and he will not . <eos>
+True	anaphora	-47.7570743560791	-51.08718395233154	The people who say they will help never do . <eos>	The people who say they will help never will . <eos>
+False	anaphora	-47.7570743560791	-47.48889446258545	The people who say they will help never do . <eos>	The people who say they will help never go . <eos>
+True	anaphora	-47.7570743560791	-49.217469215393066	The people who say they will help never do . <eos>	The people who say they will help never did . <eos>
+True	anaphora	-47.7570743560791	-52.204315185546875	The people who say they will help never do . <eos>	The people who say they will help never done . <eos>
+True	anaphora	-48.4996223449707	-49.9659948348999	She has been cheating , and Fred has too . <eos>	She has been cheating , and Fred was too . <eos>
+True	anaphora	-40.59762907028198	-47.371129512786865	If they go to the pub , I will go too . <eos>	If they go to the pub , I did go too . <eos>
+False	anaphora	-45.76898241043091	-43.25387525558472	If they do n't go to the pub , I will not too . <eos>	If they do n't go to the pub , I will go too . <eos>
+True	anaphora	-42.489737033843994	-44.80233383178711	He likes beer , does n't he ? <eos>	He likes beer , was n't he ? <eos>
+True	anaphora	-42.489737033843994	-48.04197311401367	He likes beer , does n't he ? <eos>	He likes beer , will n't he ? <eos>
+True	anaphora	-42.489737033843994	-45.13665199279785	He likes beer , does n't he ? <eos>	He likes beer , did n't he ? <eos>
+False	anaphora	-42.489737033843994	-42.47539281845093	He likes beer , does n't he ? <eos>	He likes beer , is n't he ? <eos>
+True	anaphora	-34.52183532714844	-36.204745292663574	He is sick , is n't he ? <eos>	He is sick , does n't he ? <eos>
+True	anaphora	-34.52183532714844	-41.279794692993164	He is sick , is n't he ? <eos>	He is sick , will n't he ? <eos>
+True	anaphora	-34.52183532714844	-37.039424896240234	He is sick , is n't he ? <eos>	He is sick , was n't he ? <eos>
+False	anaphora	-47.08485412597656	-45.883362770080566	She likes modern art , does n't she ? <eos>	She likes modern art , is n't she ? <eos>
+True	anaphora	-47.08485412597656	-48.91472244262695	She likes modern art , does n't she ? <eos>	She likes modern art , did n't she ? <eos>
+True	anaphora	-47.08485412597656	-54.44240760803223	She likes modern art , does n't she ? <eos>	She likes modern art , can n't she ? <eos>
+True	anaphora	-47.08485412597656	-56.966142654418945	She likes modern art , does n't she ? <eos>	She likes modern art , must n't she ? <eos>
+False	anaphora	-47.08485412597656	-46.80108642578125	She likes modern art , does n't she ? <eos>	She likes modern art , does n't she . <eos>
+False	anaphora	-45.859527587890625	-44.72276782989502	She does n't like modern art , does she ? <eos>	She does n't like modern art , is she ? <eos>
+True	cataphora	-47.530171394348145	-48.85726451873779	Because he was very cold , David put on his coat . <eos>	Because it was very cold , David put on his coat . <eos>
+True	cataphora	-38.989681243896484	-40.87408924102783	Because he was very cold , he put on his coat . <eos>	Because it was very cold , he put on his coat . <eos>
+True	cataphora	-45.47596883773804	-46.28834867477417	David put on his coat because he was very cold . <eos>	David put on his coat because it was very cold . <eos>
+True	cataphora	-39.9591007232666	-40.814640045166016	He put on his coat because he was very cold . <eos>	He put on his coat because it was very cold . <eos>
+True	cataphora	-58.58635854721069	-59.38068866729736	Although Sam might do so , I will not buy a new bike . <eos>	Because Sam might do so , I will not buy a new bike . <eos>
+True	cataphora	-58.58635854721069	-60.16752243041992	Although Sam might do so , I will not buy a new bike . <eos>	Although Sam might do so , I will also buy a new bike . <eos>
+True	cataphora	-57.78464651107788	-57.87520122528076	Because Sam might do so , I will buy a new bike . <eos>	Although Sam might do so , I will buy a new bike . <eos>
+False	cataphora	-60.72578477859497	-59.38068866729736	Because Sam might do so , I will also buy a new bike . <eos>	Because Sam might do so , I will not buy a new bike . <eos>
+True	cataphora	-41.34334659576416	-41.71596908569336	In their free time , the kids play video games . <eos>	In his free time , the kids play video games . <eos>
+True	cataphora	-41.34334659576416	-42.91095495223999	In their free time , the kids play video games . <eos>	In her free time , the kids play video games . <eos>
+False	anaphora	-51.506863594055176	-47.81832790374756	The music stopped , and that upset everyone . <eos>	The music stopped , and he upset everyone . <eos>
+False	anaphora	-106.08874750137329	-104.80977296829224	Only a few of the children ate their ice cream . They ate the strawberry flavor first . <eos>	Only a few of the children ate their ice cream . He ate the strawberry flavor first . <eos>
+False	anaphora	-106.08874750137329	-104.80977296829224	Only a few of the children ate their ice cream . They ate the strawberry flavor first . <eos>	Only a few of the children ate their ice cream . He ate the strawberry flavor first . <eos>
+False	anaphora	-106.08874750137329	-104.80977296829224	Only a few of the children ate their ice cream . They ate the strawberry flavor first . <eos>	Only a few of the children ate their ice cream . He ate the strawberry flavor first . <eos>
+True	anaphora	-46.942781925201416	-49.11531448364258	His friends have been criticizing Jim for exaggerating . <eos>	Her friends have been criticizing Jim for exaggerating . <eos>
+True	anaphora	-46.942781925201416	-47.217007637023926	His friends have been criticizing Jim for exaggerating . <eos>	Their friends have been criticizing Jim for exaggerating . <eos>
+False	anaphora	-47.45664691925049	-46.73270082473755	Her friends have been criticizing Jane for exaggerating . <eos>	His friends have been criticizing Jane for exaggerating . <eos>
+True	anaphora	-47.45664691925049	-49.11531448364258	Her friends have been criticizing Jane for exaggerating . <eos>	Her friends have been criticizing Jim for exaggerating . <eos>
+False	anaphora	-46.942781925201416	-46.73270082473755	His friends have been criticizing Jim for exaggerating . <eos>	His friends have been criticizing Jane for exaggerating . <eos>
+True	punctuation	-14.077313423156738	-16.81472396850586	What are you doing here ? <eos>	What are you doing here . <eos>
+True	punctuation	-14.077313423156738	-16.7307186126709	What are you doing here ? <eos>	What are you doing here , <eos>
+True	question	-14.077313423156738	-20.198183059692383	What are you doing here ? <eos>	Which are you doing here ? <eos>
+True	question	-14.077313423156738	-18.001173973083496	What are you doing here ? <eos>	Where are you doing here ? <eos>
+True	question	-14.077313423156738	-27.82247495651245	What are you doing here ? <eos>	When are you doing here ? <eos>
+True	question	-14.077313423156738	-18.001173973083496	What are you doing here ? <eos>	Where are you doing here ? <eos>
+True	question	-14.077313423156738	-17.457229614257812	What are you doing here ? <eos>	How are you doing here ? <eos>
+True	punctuation	-8.78548526763916	-11.602641105651855	How are you ? <eos>	How are you . <eos>
+False	punctuation	-24.710728645324707	-22.64120388031006	Who walked the dog ? <eos>	Who walked the dog . <eos>
+True	question	-24.710728645324707	-26.12248992919922	Who walked the dog ? <eos>	What walked the dog ? <eos>
+True	punctuation	-35.20949363708496	-35.816959381103516	So whom did you call ? <eos>	So whom did you call . <eos>
+False	question	-35.20949363708496	-32.515472412109375	So whom did you call ? <eos>	So who did you call ? <eos>
+True	punctuation	-18.370646476745605	-19.58362579345703	What did you try to do ? <eos>	What did you try to do . <eos>
+False	question	-24.93180751800537	-19.73276138305664	When did they arrive ? <eos>	What did they arrive ? <eos>
+True	punctuation	-46.978936195373535	-77.02636528015137	It is not cold ... it is freezing cold . <eos>	It is not cold . it is freezing cold . <eos>
+False	punctuation	-46.978936195373535	-37.044814109802246	It is not cold ... it is freezing cold . <eos>	It is not cold , it is freezing cold . <eos>
+True	punctuation	-46.978936195373535	-51.37944173812866	It is not cold ... it is freezing cold . <eos>	It is not cold = it is freezing cold . <eos>
+False	punctuation	-46.978936195373535	-40.70515823364258	It is not cold ... it is freezing cold . <eos>	It is not cold : it is freezing cold . <eos>
+False	punctuation	-46.978936195373535	-44.981642723083496	It is not cold ... it is freezing cold . <eos>	It is not cold -- it is freezing cold . <eos>
+True	punctuation	-44.981642723083496	-77.02636528015137	It is not cold -- it is freezing cold . <eos>	It is not cold . it is freezing cold . <eos>
+False	punctuation	-44.981642723083496	-38.409241676330566	It is not cold -- it is freezing cold . <eos>	It is not cold ; it is freezing cold . <eos>
+True	punctuation	-41.14572238922119	-77.02636528015137	It is not cold - it is freezing cold . <eos>	It is not cold . it is freezing cold . <eos>
+False	punctuation	-41.14572238922119	-38.409241676330566	It is not cold - it is freezing cold . <eos>	It is not cold ; it is freezing cold . <eos>
+True	punctuation	-111.4187126159668	-113.5328893661499	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>	The quick brown fox jumps over the lazy dog ; And if they have not died , they are still alive today . <eos>
+True	punctuation	-111.4187126159668	-111.5151252746582	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>	The quick brown fox jumps over the lazy dog , And if they have not died , they are still alive today . <eos>
+True	punctuation	-111.4187126159668	-132.019624710083	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>	The quick brown fox jumps over the lazy dog . And if they have not died , they are still alive today . <eos>
+True	punctuation	-111.4187126159668	-116.8487195968628	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>	The quick brown fox jumps over the lazy dog - And if they have not died , they are still alive today . <eos>
+True	punctuation	-111.4187126159668	-117.9709210395813	The quick brown fox jumps over the lazy dog ... And if they have not died , they are still alive today . <eos>	The quick brown fox jumps over the lazy dog -- And if they have not died , they are still alive today . <eos>
+True	coordination	-24.224323272705078	-27.09591007232666	Sarah and Jane go to town . <eos>	Sarah and Jane goes to town . <eos>
+True	coordination	-58.09756278991699	-60.10830593109131	Sarah and the boy she likes take dancing classes together . <eos>	Sarah and the boy she likes takes dancing classes together . <eos>
+True	coordination	-60.33725833892822	-63.85296154022217	Sarah and the boy we like take dancing classes together . <eos>	Sarah and the boy we like takes dancing classes together . <eos>
+True	coordination	-62.091633319854736	-66.94516801834106	Sarah and the boy her parents like take dancing classes together . <eos>	Sarah and the boy her parents like takes dancing classes together . <eos>
+True	coordination	-64.6919755935669	-66.89021015167236	Tom and the girl we met yesterday in the pub sleep together . <eos>	Tom and the girl we met yesterday in the pub sleeps together . <eos>
+True	coordination	-49.744256019592285	-50.47036552429199	Tom and the girl he dates sleep together . <eos>	Tom and the girl he dates sleeps together . <eos>
+False	coordination	-54.36096239089966	-54.17495107650757	Tom and the girl from the French class sleep together . <eos>	Tom and the girl from the French class sleeps together . <eos>
+True	coordination	-86.06790447235107	-87.83879470825195	The guy from the French class and the girl he dates sleep sleep . <eos>	The guy from the French class and the girl he dates sleep sleeps . <eos>
+True	coordination	-91.64550590515137	-92.03478527069092	The guy from the French class and the girl from the canto lessons sleep together . <eos>	The guy from the French class and the girl from the canto lessons sleeps together . <eos>
+True	coordination	-107.77666902542114	-109.29452657699585	Tim ( the guy from the French class ) and Sarah ( the girl from the canto lessons ) sleep together . <eos>	Tim ( the guy from the French class ) and Sarah ( the girl from the canto lessons ) sleeps together . <eos>
+False	coordination	-105.93502616882324	-105.29543018341064	Tim , the guy from the French class , and Sarah , the girl from the canto lessons , sleep together . <eos>	Tim , the guy from the French class , and Sarah , the girl from the canto lessons , sleeps together . <eos>
+False	coordination	-81.46487760543823	-81.11416721343994	The guy in the basketball team and the girl from the French class go on a date . <eos>	The guy in the basketball team and the girl from the French class goes on a date . <eos>
+False	coordination	-95.47287797927856	-94.57510709762573	Tom ( the guy in the basketball team ) and Jane ( the girl from the French class ) go on a date . <eos>	Tom ( the guy in the basketball team ) and Jane ( the girl from the French class ) goes on a date . <eos>
+False	coordination	-94.42654085159302	-92.52732419967651	Tom , the guy in the basketball team , and Jane , the girl from the French class , go on a date . <eos>	Tom , the guy in the basketball team , and Jane , the girl from the French class , goes on a date . <eos>
+True	coordination	-30.732008934020996	-33.99926471710205	Sarah and Jane do n't go to town . <eos>	Sarah and Jane does n't go to town . <eos>
+True	coordination	-31.042163848876953	-34.910067558288574	Sarah and Jane like ice cream . <eos>	Sarah and Jane likes ice cream . <eos>
+True	coordination	-33.228440284729004	-36.74835395812988	Sarah and Jane do n't like ice cream . <eos>	Sarah and Jane does n't like ice cream . <eos>
+False	coordination	-69.29246997833252	-57.66638660430908	Do Jim and Tom drink a beer every night together ? <eos>	Does Jim and Tom drink a beer every night together ? <eos>
+False	coordination	-73.21039390563965	-63.14364242553711	Do Jim and the boys drink a beer every night together ? <eos>	Does Jim and the boys drink a beer every night together ? <eos>
+False	coordination	-69.17698192596436	-60.95033502578735	Do the boys and Jane drink a beer every night together ? <eos>	Does the boys and Jane drink a beer every night together ? <eos>
+False	coordination	-56.116395473480225	-45.44176530838013	Do the boys drink a beer every night together ? <eos>	Does the boys drink a beer every night together ? <eos>
+False	coordination	-48.95048809051514	-44.01859664916992	Do they drink a beer every night together ? <eos>	Does they drink a beer every night together ? <eos>
+True	coordination	-69.29246997833252	-70.75173377990723	Do Jim and Tom drink a beer every night together ? <eos>	Do Jim and Tom drinks a beer every night together ? <eos>
+False	punctuation	-69.29246997833252	-60.378682136535645	Do Jim and Tom drink a beer every night together ? <eos>	Do Jim and Tom drink a beer every night together . <eos>
+True	coordination	-42.68652057647705	-45.05174732208252	The chicken and the rice go well together . <eos>	The chicken and the rice goes well together . <eos>
+True	coordination	-39.80006790161133	-47.3043327331543	The president will understand and agree . <eos>	The president will understands and agree . <eos>
+True	coordination	-39.80006790161133	-41.466054916381836	The president will understand and agree . <eos>	The president will understand and agrees . <eos>
+True	coordination	-34.726789474487305	-40.25318717956543	The president understands and agrees . <eos>	The president understands and agree . <eos>
+False	coordination	-50.752150535583496	-50.28795528411865	The president will understand the criticism and agree . <eos>	The president will understand the criticism and agrees . <eos>
+True	coordination	-48.96286964416504	-52.967848777770996	The president will understand the criticism and take action . <eos>	The president will understand the criticism and takes action . <eos>
+True	coordination	-48.96286964416504	-52.967848777770996	The president will understand the criticism and take action . <eos>	The president will understand the criticism and takes action . <eos>
+True	coordination	-45.95597743988037	-47.82215118408203	The president understands the criticism and takes action . <eos>	The president understands the criticism and take action . <eos>
+True	coordination	-49.50221633911133	-53.960018157958984	We think that the president will understand the criticism and take action . <eos>	We think that the president will understand the criticism and takes action . <eos>
+True	coordination	-52.88907814025879	-56.54942607879639	She thinks that the president will understand the criticism and take action . <eos>	She thinks that the president will understand the criticism and takes action . <eos>
+False	coordination	-68.22200059890747	-67.74583864212036	Susan asks you but forces me to read the book on syntax . <eos>	Susan asks you but force me to read the book on syntax . <eos>
+False	coordination	-108.0341248512268	-106.17112016677856	Susan asks you about the movie you have seen last night but forces me to read the book on syntax . <eos>	Susan asks you about the movie you have seen last night but force me to read the book on syntax . <eos>
+True	coordination	-65.55630683898926	-68.15123271942139	They ask her but force me to read the book on syntax . <eos>	They ask her but forces me to read the book on syntax . <eos>
+True	coordination	-70.95218849182129	-72.05201244354248	They asks her but force me to read the book on syntax . <eos>	They asks her but forces me to read the book on syntax . <eos>
+True	coordination	-31.00603675842285	-36.03617286682129	Susan works slowly and carefully . <eos>	Susan works slowly and careful . <eos>
+False	anaphora	-63.42852020263672	-61.09265995025635	Susan has such a complex personality , I do not even try to understand her . <eos>	Susan has such a complex personality , I do not even try to understand it . <eos>
+False	anaphora	-53.132264137268066	-49.49244689941406	Susan has such a complex personality , I cannot understand her . <eos>	Susan has such a complex personality , I cannot understand it . <eos>
+True	anaphora	-96.05854082107544	-102.48236894607544	Susan has such a complex personality . Stop trying to understand it ! <eos>	Susan has such a complex personality . Stop trying to understand her ! <eos>
+False	anaphora	-62.82636833190918	-60.31649971008301	Susan is such a complicated person , I do not even try to understand her . <eos>	Susan is such a complicated person , I do not even try to understand it . <eos>
+False	anaphora	-51.58396244049072	-47.88690376281738	Susan is such a complicated person , I cannot understand her . <eos>	Susan is such a complicated person , I cannot understand it . <eos>
+False	anaphora	-96.279381275177	-89.87133169174194	Susan has a complex personality . Stop trying to understand her ! <eos>	Susan has a complex personality . Stop trying to understand it ! <eos>
+False	anaphora	-56.12609148025513	-53.754281520843506	She has such a complex personality , I do not even try to understand her . <eos>	She has such a complex personality , I do not even try to understand it . <eos>
+False	anaphora	-46.454750537872314	-42.86721467971802	She has such a complex personality , I cannot understand her . <eos>	She has such a complex personality , I cannot understand it . <eos>
+True	anaphora	-90.21387481689453	-96.64106178283691	She has such a complex personality . Stop trying to understand it ! <eos>	She has such a complex personality . Stop trying to understand her ! <eos>
+False	anaphora	-57.830477714538574	-55.50199890136719	She is such a complicated person , I do not even try to understand her . <eos>	She is such a complicated person , I do not even try to understand it . <eos>
+False	anaphora	-46.79048442840576	-43.356553077697754	She is such a complicated person , I cannot understand her . <eos>	She is such a complicated person , I cannot understand it . <eos>
+False	anaphora	-91.3372220993042	-84.92766952514648	She has a complex personality . Stop trying to understand her ! <eos>	She has a complex personality . Stop trying to understand it ! <eos>
+True	semantics	-36.84353828430176	-38.428833961486816	I have a daughter and her name is Maria . <eos>	I have a daughter and his name is Maria . <eos>
+True	semantics	-36.84353828430176	-40.36624622344971	I have a daughter and her name is Maria . <eos>	I have a daughter and its name is Maria . <eos>
+False	semantics	-77.29110813140869	-75.71271705627441	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>	I have two daughters and a son : her names are Maria and Jane , and his name is Jim . <eos>
+False	semantics	-77.29110813140869	-75.57610034942627	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>	I have two daughters and a son : his names are Maria and Jane , and his name is Jim . <eos>
+False	semantics	-77.29110813140869	-77.25080585479736	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>	I have two daughters and a son : their names are Maria and Jane , and her name is Jim . <eos>
+True	semantics	-77.29110813140869	-79.57701396942139	I have two daughters and a son : their names are Maria and Jane , and his name is Jim . <eos>	I have two daughters and a son : their names are Maria and Jane , and its name is Jim . <eos>
+False	semantics	-68.99103927612305	-61.60103988647461	I have two daughters and a son : their names are Maria , Jane and their . <eos>	I have two daughters and a son : their names are Maria , Jane and her . <eos>
+False	semantics	-68.99103927612305	-67.12315654754639	I have two daughters and a son : their names are Maria , Jane and their . <eos>	I have two daughters and a son : their names are Maria , Jane and his . <eos>
+False	semantics	-64.08222389221191	-61.754350662231445	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>	I have two daughters and a son : their names are Maria , Jane and Susan . <eos>
+False	semantics	-64.08222389221191	-61.37037467956543	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>	I have two daughters and a son : their names are Maria , Jane and Sarah . <eos>
+False	semantics	-64.08222389221191	-61.14709186553955	I have two daughters and a son : their names are Maria , Jane and Jim . <eos>	I have two daughters and a son : their names are Maria , Jane and Maria . <eos>
+True	semantics	-62.50473880767822	-63.00678062438965	I have two daughters and a son : their names are Tom , Maria and Jane . <eos>	I have two daughters and a son : their names are Tom , Maria and Jim . <eos>
+True	semantics	-31.605963706970215	-32.63909435272217	I have two daughters : Maria and Jane . <eos>	I have two daughters : Maria and Tom . <eos>
+True	generic_antecedent	-38.99720239639282	-47.459556102752686	All people get hungry , so they eat . <eos>	All people get hungry , so she eat . <eos>
+True	generic_antecedent	-44.15265703201294	-44.873149394989014	All people get hungry , so they eats . <eos>	All people get hungry , so she eats . <eos>
+True	valency	-41.51216697692871	-42.879324436187744	Winning the prize makes our training worthwhile . <eos>	Winning the prize make our training worthwhile . <eos>
+True	tense	-41.51216697692871	-42.4294548034668	Winning the prize makes our training worthwhile . <eos>	Winning the prize made our training worthwhile . <eos>
+False	valency	-46.3701958656311	-46.25122785568237	That they come late does not surprise us . <eos>	That they come late do not surprise us . <eos>
+True	valency	-44.60143995285034	-46.59549379348755	That they come late surprises us . <eos>	That they come late surprise us . <eos>
+True	tense	-35.45665264129639	-44.10296440124512	Sam persuaded us to contribute to the cause . <eos>	Sam persuaded us to contributes to the cause . <eos>
+False	valency	-51.32172870635986	-48.666871547698975	That she would veto this bill upsets us . <eos>	That she would veto this bill upset us . <eos>
