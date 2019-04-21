@@ -1,19 +1,21 @@
 # Do LSTMs learn Syntax?
 
-Time underlies many aspects of human behaviour. Recurrent Neural Networks (RNNs) arose from the necessity to represent time. 
+Time underlies many aspects of human behaviour. 
 
-In 1990, Elman proposed representing time implicitly, by the effect it has on processing. In this framework, hidden units are fed back to themselves determining systems to gain dynamic properties and become responsive to temporal sequences. RNNs are both general and effective at capturing long-term temporal dependencies. Their gated variants, Long Short-term Memories (LSTMs), have proven even better at modelling long-distance statistical regularities. Consequently, they have become the de facto building block in many neural processing tasks, such as machine translation and language modelling.
+In 1990, Elman proposed representing time implicitly, by the effect it has on processing. In this framework, hidden units are fed back to themselves determining systems to gain dynamic properties and become responsive to temporal sequences. Therefore, Recurrent Neural Networks (RNNs) arose from the necessity to represent time. 
 
-RNNs do not explicitly encode hierarchical structures encountered in many natural settings, amongst which language. However, due to their memory and processing capacity, they are able to develop powerful internal representations that reflect task demands in the context of prior internal states. The question arising is, then: are RNNs able to implicitly discover syntactic features?
+RNNs are both general and effective at capturing long-term temporal dependencies. Their gated variants, Long Short-term Memories (LSTMs), have proven even better at modelling long-distance regularities and have become the de facto building block in many neural processing tasks, such as machine translation and language modelling.
+
+RNNs do not explicitly encode hierarchical structures encountered in many natural settings, amongst which language. However, due to their memory and processing capacity, they are able to develop powerful internal representations that reflect task demands in the context of prior internal states. The question arising is, then: **are RNNs able to implicitly discover syntactic features?**
 
 This is a fascinating topic that requires further investigations as there is no definite answer yet.
 
 In this repository, I give away:
- - [a selection of papers](some-relevant-papers) I found relevant/interesting on the topic with links to the paper and code, if publicly available
+ - [a selection of papers](#papers)(below) that I found relevant/interesting on the topic with links to the code, if publicly available
  - some [experimental code](experiments) to build your own templates and run your own evaluation experiments on your favourite pre-trained language model (recurrent or non-recurrent)
  - some [paper summaries](paper-summaries) along with my thoughts and findings related to the topic
 
-## Some relevant papers
+# <a name="papers">Some relevant papers</a>
 
 [Finding Structure in Time](https://crl.ucsd.edu/~elman/Papers/fsit.pdf), Elman (1990)
 
