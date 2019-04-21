@@ -1,5 +1,18 @@
 # Do LSTMs learn Syntax?
 
+Time underlies many aspects of human behaviour. Recurrent Neural Networks (RNNs) arose from the necessity to represent time. 
+
+In 1990, Elman proposed representing time implicitly, by the effect it has on processing. In this framework, hidden units are fed back to themselves determining systems to gain dynamic properties and become responsive to temporal sequences. RNNs are both general and effective at capturing long-term temporal dependencies. Their gated variants, Long Short-term Memories (LSTMs), have proven even better at modelling long-distance statistical regularities. Consequently, they have become the de facto building block in many neural processing tasks, such as machine translation and language modelling.
+
+RNNs do not explicitly encode hierarchical structures encountered in many natural settings, amongst which language. However, due to their memory and processing capacity, they are able to develop powerful internal representations that reflect task demands in the context of prior internal states. The question arising is, then: are RNNs able to implicitly discover syntactic features?
+
+This is a fascinating topic that requires further investigations as there is no definite answer yet.
+
+In this repository, I give away:
+ - [a selection of papers](some-relevant-papers) I found relevant/interesting on the topic with links to the paper and code, if publicly available
+ - some [experimental code](experiments) to build your own templates and run your own evaluation experiments on your favourite pre-trained language model (recurrent or non-recurrent)
+ - some [paper summaries](paper-summaries) along with my thoughts and findings related to the topic
+
 ## Some relevant papers
 
 [Finding Structure in Time](https://crl.ucsd.edu/~elman/Papers/fsit.pdf), Elman (1990)
@@ -34,6 +47,8 @@
 
 [On the State of the Art of Evaluation in Neural Language Models](https://arxiv.org/pdf/1707.05589.pdf), Melis et al. (2017) 
 
+[How Grammatical is Character-level Neural Machine Translation? Assessing MT Quality with Contrastive Translation Pairs](https://aclweb.org/anthology/E17-2060), Rico Sennrich (2017)
+
 [Using Deep Neural Networks to Learn Syntactic Agreement](http://csli-lilt.stanford.edu/ojs/index.php/LiLT/article/view/94/79), Bernardy and Lappin (2017)
 
 [Colorless green recurrent networks dream hierarchically](http://aclweb.org/anthology/N18-1108), Gulordava et al. (2018) [[code]](https://github.com/facebookresearch/colorlessgreenRNNs)
@@ -41,6 +56,8 @@
 [Targeted Syntactic Evaluation of Language Models](http://aclweb.org/anthology/D18-1151), Marvin and Linzen (2018) [[code]](https://github.com/BeckyMarvin/LM_syneval)
 
 [Deep RNNs Encode Soft Hierarchical Syntax](https://aclweb.org/anthology/P18-2003), Blevins et al. (2018)
+
+[Why Self-Attention? A Targeted Evaluation of Neural Machine Translation Architectures](https://aclweb.org/anthology/D18-1458), Tang et al. (2018)
 
 [The Importance of Being Recurrent for Modeling Hierarchical Structure](http://aclweb.org/anthology/D18-1503), Tran et al. (2018) [[code]](https://github.com/ketranm/fan_vs_rnn)
 
@@ -61,6 +78,10 @@
 [Ordered Neurons: Integrating Tree Structures into Recurrent Neural Networks](https://arxiv.org/pdf/1810.09536.pdf), Shen et al. (2018) [[code]](https://github.com/yikangshen/Ordered-Neurons)
 
 [Sharp Nearby, Fuzzy Far Away: How Neural Language Models Use Context](http://aclweb.org/anthology/P18-1027), Khandelwal et al. (2018)
+
+[On the State of the Art of Evaluation in Neural Language Models](https://openreview.net/pdf?id=ByJHuTgA-), Melis et al. (2018)
+
+[Neural Network Acceptability Judgments](https://arxiv.org/pdf/1805.12471.pdf), Warstadt et al. (2018) [[code]](https://github.com/nyu-mll/CoLA-baselines)
 
 [Assessing BERT’s Syntactic Abilities](https://arxiv.org/pdf/1901.05287.pdf), Goldberg (2019) [[code]](https://github.com/yoavg/bert-syntax)
 
