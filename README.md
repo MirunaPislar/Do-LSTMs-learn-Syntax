@@ -11,7 +11,7 @@ RNNs do not explicitly encode hierarchical structures encountered in many natura
 This is a fascinating topic that requires further investigations as there is no definite answer yet.
 
 In this repository, I give away:
- - [a selection of papers](#papers)(below) that I found relevant/interesting on the topic with links to the code, if publicly available
+ - [a selection of papers](#papers) that I found relevant/interesting on the topic with links to the code, if publicly available
  - some [experimental code](experiments) to build your own templates and run your own evaluation experiments on your favourite pre-trained language model (recurrent or non-recurrent)
  - some [paper summaries](paper-summaries) along with my thoughts and findings related to the topic
 
@@ -27,13 +27,23 @@ In this repository, I give away:
 
 [Toward a connectionist model of recursion in human linguistic performance](https://pdfs.semanticscholar.org/6111/e54dca481ee9176f718e2f33281d944d1fcd.pdf), Christiansen and Chater (1999)
 
+[Recurrent Nets That Time and Count](ftp://ftp.idsia.ch/pub/juergen/TimeCount-IJCNN2000.pdf), Gers and Schmidhuber (2000)
+
+[Context-free and context-sensitive dynamics in recurrent neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.58.1917&rep=rep1&type=pdf),  Boden and Wiles
+
 [LSTM recurrent networks learn simple context-free and context-sensitive languages](https://www.researchgate.net/publication/3303030_LSTM_recurrent_networks_learn_simple_context-free_and_context-sensitive_languages), Gers and Schmidhuber (2001)
 
+[Incremental training of first order recurrent neural networks to predict a context-sensitive language](https://www.cse.unsw.edu.au/~blair/pubs/2003ChalupBlairNN.pdf), Chalup and Blair (2003)
+
 [Statistical Representation of Grammaticality Judgements: the Limits of N-Gram Models](https://pdfs.semanticscholar.org/e442/a3ca917b8b491375c9662843f7fd8c729598.pdf), Clark et al. (2013)
+
+[LSTM: A Search Space Odyssey](https://arxiv.org/abs/1503.04069), Greff et al. (2015)
 
 [Unsupervised Prediction of Acceptability Judgements](https://www.aclweb.org/anthology/P15-1156), Lau et al. (2015)
 
 [Structures, Not Strings: Linguistics as Part of the Cognitive Sciences](https://www.sciencedirect.com/science/article/pii/S1364661315002326), Everaert et al. (2015) 
+
+[An Empirical Exploration of Recurrent Network Architectures](http://proceedings.mlr.press/v37/jozefowicz15.pdf), Jozefowicz et al. (2015)
 
 [The Now-or-Never bottleneck: A fundamental constraint on language](http://cnl.psych.cornell.edu/pubs/2016-cc-BBS.pdf), Christiansen and Chater (2016)
 
