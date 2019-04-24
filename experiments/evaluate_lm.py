@@ -80,12 +80,21 @@ def read_datafile():
 
     # If scoring whole sentences, try first reading from an "own" data file.
     # Otherwise, try to obtain it from a "target-word"-only data file.
-    if not args.eval_target_word and ("sent" in headers
-                                      and "sent_alt" in headers
-                                      and "pattern" in headers):
+    if not args.eval_target_word \
+            and ("sent" in headers and "sent_alt" in headers
+                 and "pattern" in headers):
         for row in rows:
             data.append((row["pattern"], row["sent"], row["sent_alt"]))
         return data
+
+    # If scoring individual tokens, but the data file is in "whole-sentence"
+    # format, try converting it to obtain it (assumes only one word differs).
+    if args.eval_target_word and not \
+            ("sent" in headers and "form" in headers and "form_alt" in headers
+             and "len_prefix" in headers and "pattern" in headers):
+        converted_file = args.data.split(".")[0] + "_words_only." + args.data.split(".")[1]
+        from_sent_to_tokens(rows, converted_file)
+        rows = csv.DictReader(open(converted_file, encoding="utf8"), delimiter="\t")
 
     for row in rows:
         pattern = row["pattern"]
@@ -136,6 +145,8 @@ def read_datafile_original():
             sent = row["sent"].lower().split()
         else:
             sent = row["sent"].split()
+        if "bert" in args.model_name:
+            sent = sent[:-1]  # get rid of the <eos>
         good_form = row["form"]
         bad_form = next_row["form"]
         target_idx = int(row["len_prefix"])
@@ -144,6 +155,31 @@ def read_datafile_original():
         sent = " ".join(sent)
         data.append((row["pattern"], sent, target_idx, good_form, bad_form))
     return data
+
+
+def from_sent_to_tokens(rows, filename):
+    with open(filename, "w") as f:
+        fieldnames = ["pattern", "form", "form_alt", "len_prefix", "sent"]
+        writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter="\t")
+        writer.writeheader()
+        for row in rows:
+            pattern = row["pattern"]
+            sent = row["sent"]
+            sent_alt = row["sent_alt"]
+            len_prefix, form, form_alt = find_target_word(sent, sent_alt)
+            writer.writerow(
+                {"pattern": pattern, "form": form, "form_alt": form_alt,
+                 "len_prefix": len_prefix, "sent": sent})
+
+
+def find_target_word(sent, sent_alt):
+    tokens_sent = sent.split()
+    tokens_sent_alt = sent_alt.split()
+    for i, (tok, tok_alt) in enumerate(zip(tokens_sent, tokens_sent_alt)):
+        if tok != tok_alt:
+            return i, tok, tok_alt
+    raise ValueError("Reached end of sentences and no target word found! "
+                     "Sentences are identical:\n1. %s\n2. %s" % sent, sent_alt)
 
 
 def load_model():
@@ -156,6 +192,7 @@ def load_model():
         model_path = "trained_models/lm_multitask_ccg.pt"
     elif "pos" in args.model_name.lower():
         model_path = "trained_models/lm_multitask_pos.pt"
+        # model_path = "trained_models/lm_multitask_pos_failed_ep7.pt"
     else:
         raise ValueError("Invalid model name: %s." % args.model_name)
     with open(model_path, "rb") as f:
@@ -255,7 +292,7 @@ def evaluate_lm_target_words(data, model, dictionary):
               sent.encode("utf8"), sep=u"\t")
 
 
-def eval_each_word_in_sentence(token_ids, model, dictionary):
+def eval_each_word_in_sentence(token_ids, model, dictionary, grammatical):
     model.eval()
     hidden = model.init_hidden(bsz=1)
 
@@ -276,7 +313,7 @@ def eval_each_word_in_sentence(token_ids, model, dictionary):
         log_prob_this_word = float(log_probs_np[mask_this_word][0][word_idx])
         word_scores.append(log_prob_this_word)
         if args.print_word_probs:
-            print(str(dictionary.idx2word[word_idx]),
+            print(str(dictionary.idx2word[token_ids[i]]), grammatical,
                   str(i), str(log_prob_this_word), sep="\t")
     return word_scores
 
@@ -301,11 +338,11 @@ def evaluate_lm_sentences(data, model, dictionary):
         token_ids_alt = tokenize_sentence(dictionary, sent_bad)
 
         word_scores = eval_each_word_in_sentence(
-            token_ids, model, dictionary)
+            token_ids, model, dictionary, grammatical="grammatical")
         if args.print_word_probs:
             print("\n")
         word_scores_alt = eval_each_word_in_sentence(
-            token_ids_alt, model, dictionary)
+            token_ids_alt, model, dictionary, grammatical="ungrammatical")
 
         assert(len(word_scores) == len(word_scores_alt)), \
             "Word scores don't match!\n%s\n%s" \
@@ -387,7 +424,7 @@ def main():
     print("Vocabulary size = ", len(dictionary), file=sys.stderr)
 
     # Load and evaluate a pre-trained language model.
-    if args.model_name == "lm":
+    if "lm" in args.model_name:
         model = load_model()
         if args.eval_target_word:
             evaluate_lm_target_words(data, model, dictionary)
@@ -402,7 +439,9 @@ def main():
         if "base" in args.model_name:
             model_name = "bert-base-" + case
         bert = BertForMaskedLM.from_pretrained(model_name)
-        tokenizer = tokenization.BertTokenizer.from_pretrained(model_name)
+        do_lower_case = "uncased" in args.model_name
+        tokenizer = tokenization.BertTokenizer.from_pretrained(
+            model_name, do_lower_case=do_lower_case)
         evaluate_bert(data, bert, tokenizer)
     else:
         raise ValueError("Invalid model name %s!" % args.model_name)

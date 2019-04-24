@@ -9,9 +9,8 @@ class CoordinationTemplates:
                 (["PropN1", "AND", "PropN2", "NEG_MOD", "MV", "DOT"],
                  {"match": ([0, 2], [3]), "vary": []}),
             "simple_2NPs_coord_interr":
-                (["INTERR_MOD", "PropN1_lower", "AND", "PropN2", "MV", "QUEST_MARK"], 
+                (["INTERR_MOD", "PropN1_lower", "AND", "PropN2", "MV", "QUEST_MARK"],
                  {"match": ([1, 3], [0]), "vary": []}),
-
 
             "simple_3NPs_coord_aff":
                 (["PropN1", "COMMA", "PropN2", "AND", "PropN3", "MV", "DOT"],
@@ -23,17 +22,15 @@ class CoordinationTemplates:
                 (["INTERR_MOD", "PropN1_lower", "COMMA", "PropN2", "AND", "PropN3", "MV", "QUEST_MARK"],
                  {"match": ([1, 3, 5], [0]), "vary": []}),
 
-
             "first_expanded_2NPs_coord_aff":
-                (["ExpNP", "AND", "PropN1", "MV", "DOT"],
+                (["ExpNP", "AND", "PropN1_lower", "MV", "DOT"],
                  {"match": ([0, 2], [3]), "vary": []}),
             "first_expanded_2NPs_coord_neg":
-                (["ExpNP", "AND", "PropN1", "NEG_MOD", "MV", "DOT"],
+                (["ExpNP", "AND", "PropN1_lower", "NEG_MOD", "MV", "DOT"],
                  {"match": ([0, 2], [3]), "vary": []}),
             "first_expanded_2NPs_coord_interr":
-                (["INTERR_MOD", "ExpNP_lower", "AND", "PropN1", "MV", "QUEST_MARK"],
+                (["INTERR_MOD", "ExpNP_lower", "AND", "PropN1_lower", "MV", "QUEST_MARK"],
                  {"match": ([1, 3], [0]), "vary": []}),
-
 
             "second_expanded_2NPs_coord_aff":
                 (["PropN1", "AND", "ExpNP_lower", "MV", "DOT"],
@@ -45,7 +42,6 @@ class CoordinationTemplates:
                 (["INTERR_MOD", "PropN1_lower", "AND", "ExpNP_lower", "MV", "QUEST_MARK"],
                  {"match": ([1, 3], [0]), "vary": []}),
 
-
             "both_expanded_2NPs_coord_aff":
                 (["ExpNP", "AND", "ExpNP2", "MV", "DOT"],
                  {"match": ([0, 2], [3]), "vary": []}),
@@ -56,17 +52,15 @@ class CoordinationTemplates:
                 (["INTERR_MOD", "ExpNP_lower", "AND", "ExpNP2", "MV", "QUEST_MARK"],
                  {"match": ([1, 3], [0]), "vary": []}),
 
-
             "first_expanded_3NPs_coord_aff":
-                (["ExpNP", "COMMA", "PropN1", "AND", "PropN3", "MV", "DOT"],
+                (["ExpNP", "COMMA", "PropN1_lower", "AND", "PropN3", "MV", "DOT"],
                  {"match": ([0, 2, 4], [5]), "vary": []}),
             "first_expanded_3NPs_coord_neg":
-                (["ExpNP", "COMMA", "PropN1", "AND", "PropN3", "NEG_MOD", "MV", "DOT"],
+                (["ExpNP", "COMMA", "PropN1_lower", "AND", "PropN3", "NEG_MOD", "MV", "DOT"],
                  {"match": ([0, 2, 4], [5]), "vary": []}),
             "first_expanded_3NPs_coord_interr":
-                (["INTERR_MOD", "ExpNP_lower", "COMMA", "PropN1", "AND", "PropN3", "MV", "QUEST_MARK"],
+                (["INTERR_MOD", "ExpNP_lower", "COMMA", "PropN1_lower", "AND", "PropN3", "MV", "QUEST_MARK"],
                  {"match": ([1, 3, 5], [0]), "vary": []}),
-
 
             "last_expanded_3NPs_coord_aff":
                 (["PropN1", "COMMA", "PropN3", "AND", "ExpNP_lower", "MV", "DOT"],
@@ -77,7 +71,6 @@ class CoordinationTemplates:
             "last_expanded_3NPs_coord_interr":
                 (["INTERR_MOD", "PropN1_lower", "COMMA", "PropN3", "AND", "ExpNP_lower", "MV", "QUEST_MARK"],
                  {"match": ([1, 3, 5], [0]), "vary": []}),
-
 
             "both_expanded_3NPs_coord_aff":
                 (["ExpNP", "COMMA", "ExpNP2", "AND", "PropN3", "MV", "DOT"],
@@ -94,8 +87,6 @@ class CoordinationTemplates:
 class TenseAgreementTemplates:
     def __init__(self):
         self.rules = {
-
-            #   ****** PRESENT TENSE WITH VERB BE ******
 
             # Present tense agreement AFFIRMATIVE with the main verb BE.
             # e.g. Sam is angry , and Fred is too . <eos>
@@ -142,8 +133,6 @@ class TenseAgreementTemplates:
                 (["NP1_pl", "presBe_pl", "BE_action", "COMMA", "BUT", "NP2_pl", "presBe_pl", "NOT", "DOT"],
                  {"match": ([5], [6]), "vary": []}),
 
-            #   ****** PAST TENSE ******
-
             # Past tense agreement AFFIRMATIVE.
             # e.g. Sam laughed , and Fred did too . <eos>
             "tense_agr_past_sg_sg_aff":
@@ -173,9 +162,6 @@ class TenseAgreementTemplates:
             "tense_agr_past_pl_pl_neg":
                 (["NP1_pl", "DID_past_pl", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_pl", "DID_past_pl", "DOT"],
                  {"match": ([6], [7]), "vary": []}),
-
-
-            #   ****** FUTURE TENSE ******
 
             # Future tense agreement AFFIRMATIVE.
             # e.g. Sam will laugh , and Fred will too . <eos>
@@ -207,16 +193,6 @@ class TenseAgreementTemplates:
                 (["NP1_pl", "WILL_future_pl", "NOT", "INFINITIVE_action", "COMMA", "BUT", "NP2_pl", "WILL_future_pl", "DOT"],
                  {"match": ([6], [7]), "vary": []}),
 
-
-            # =============================================================================
-
-            # TEMPLATES WITH INVERSION
-
-            # =============================================================================
-
-
-            #   ****** PRESENT TENSE WITH VERB BE ******
-
             # Present tense agreement AFFIRMATIVE with the main verb BE and INVERSION.
             # e.g. Sam is angry , and so is Fred . <eos>
             "tense_agr_with_inv_presBe_sg_sg_aff":
@@ -246,8 +222,6 @@ class TenseAgreementTemplates:
             "tense_agr_with_inv_presBe_pl_pl_neg":
                 (["NP1_pl", "presBe_pl", "NOT", "BE_action", "COMMA", "AND_neg", "presBe_pl", "NP2_pl", "DOT"],
                  {"match": ([7], [6]), "vary": []}),
-
-            #   ****** PAST TENSE ******
 
             # Past tense agreement AFFIRMATIVE with INVERSION.
             # e.g. Sam laughed , and so did Fred . <eos>
@@ -279,9 +253,6 @@ class TenseAgreementTemplates:
                 (["NP1_pl", "DID_past_pl", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "DID_past_pl", "NP2_pl", "DOT"],
                  {"match": ([7], [6]), "vary": []}),
 
-
-            #   ****** FUTURE TENSE ******
-
             # Future tense agreement AFFIRMATIVE with INVERSION.
             # e.g. Sam will laugh , and so will Fred . <eos>
             "tense_agr_with_inv_future_sg_sg_aff":
@@ -312,14 +283,6 @@ class TenseAgreementTemplates:
                 (["NP1_pl", "WILL_future_pl", "NOT", "INFINITIVE_action", "COMMA", "AND_neg", "WILL_future_pl", "NP2_pl", "DOT"],
                  {"match": ([7], [6]), "vary": []}),
 
-            # =============================================================================
-
-            # TEMPLATES FOR TAGS
-
-            # =============================================================================
-
-            #   ****** PRESENT TENSE ******
-
             # Present tense agreement AFFIRMATIVE with the main verb BE.
             # e.g. Sam is angry , is n't he ? <eos>
             "tense_agr_tags_presBe_sg_aff":
@@ -338,8 +301,6 @@ class TenseAgreementTemplates:
                 (["NP1_pl", "presBe_pl", "NT", "BE_action", "COMMA", "presBe_pl", "THEY", "QUEST_MARK"],
                  {"match": ([0], [5]), "vary": []}),
 
-            #   ****** PAST TENSE ******
-
             # Past tense agreement AFFIRMATIVE.
             # e.g. Sam laughed , did n't he ? <eos>
             "tense_agr_tags_past_sg_aff":
@@ -357,8 +318,6 @@ class TenseAgreementTemplates:
             "tense_agr_tags_past_pl_neg":
                 (["NP1_pl", "DID_past_pl", "NT", "INFINITIVE_action", "COMMA", "DID_past_pl", "THEY", "QUEST_MARK"],
                  {"match": ([0], [5]), "vary": []}),
-
-            #   ****** FUTURE TENSE ******
 
             # Future tense agreement AFFIRMATIVE.
             # e.g. Sam will laugh , will n't he ? <eos>
