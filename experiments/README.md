@@ -1,19 +1,13 @@
-# Do LSTMs learn Syntax?
-
-## Introduction
--------------------------
-
-Evaluate LSTMs (trained for language modelling) for syntax. 
+# Evaluate LSTMs for syntax 
 
 This repository does _not_ contain the code to _train_ a language model. Instead, it should get you started quickly on testing LSTMs' syntactic abilities. Here you can find the code to make templates for your desired syntactic constructions and evaluate a pre-trained language model on them.
 
 ## Data format
--------------------------
 
 Three data formats are compatible with the evaluation script:
 
 1. Original
-    - This is the original _.tab_ file format proposed by Gulordava et al. (2018)
+    - This is the original _.tab_ file format proposed by Gulordava et al. (2018).
     - An example file is available [here](https://raw.githubusercontent.com/facebookresearch/colorlessgreenRNNs/master/data/agreement/English/generated.tab).
     
 2. Word-focused format
@@ -27,7 +21,7 @@ Three data formats are compatible with the evaluation script:
     - An example file is provided in _preliminary_experiments_ under the [data/](data) directory.
 
 3. Sentence-focused format
-    - This format allows for evaluations between sentences that differ in more than one word (so you can introduce multiple errors)
+    - This format allows for evaluations between pairs of sentences that differ in more than one word (so you can introduce multiple errors).
     - The file format should have the following header fields:
         - _pattern_ -- name of the syntactic test case
         - _sent_ -- the grammatical form of the sentence 
@@ -35,7 +29,7 @@ Three data formats are compatible with the evaluation script:
     - An example is provided in the _my_coord_templates_ file under the [data/](data) directory.
 
 ## Requirements
--------------------------
+
 * [Python](https://www.python.org/downloads/) (tested with 3.5.2)
 * [PyTorch](https://pytorch.org/get-started/locally/) (tested with 1.0.0 )
 * [pytorch_pretrained_bert](https://github.com/huggingface/pytorch-pretrained-BERT)
@@ -43,7 +37,6 @@ Three data formats are compatible with the evaluation script:
 * [tqdm](https://github.com/tqdm/tqdm)
 
 ## Instructions
--------------------------
 
 **1. Get a language model**
 
@@ -53,11 +46,11 @@ If you want to use Gulordava et al.'s (2018) language model (perplexity 52.10), 
 
 I have also trained my own language model in a multitask learning setting, using part-of-speech tagging as the secondary objective (perplexity 63.14). Get in touch if you want to try it.
 
-**2. Get/create some syntactic test cases.**
+**2. Get or create some syntactic test cases.**
 
 You could use some of the templates provided by Linzen et al. (2016), Gulordava et al. (2018) or Marvin and Linzen (2018) to test the model's syntactic abilities (mainly agreement in number, but check their papers for details).
 
-We also provide templates for the following two test cases: verb agreement with a short/long NP-coordination and tense agreement in anaphoric sentences. They can be found under the [data/](data) directory.
+We also provide templates for verb agreement with a short/long NP-coordination and for tense agreement in anaphoric sentences (under the [data/](data) directory).
 
 To create the templates for NP-coordination, run:
 
@@ -65,9 +58,11 @@ To create the templates for NP-coordination, run:
 python make_templates.py --filename data/my_coord_templates.tab --type coord
 ```
 
-To create the templates for verbal tense agreement, just replace *coord* with *tense* in the script above. Notice that the templates will be generated in the _sentence-focused_ format described above.
+To create the templates for verbal tense agreement, just replace *coord* with *tense*. The templates will be generated in the _sentence-focused_ format.
 
-3. To evaluate a certain language model, you just need to run ```bash evaluate_lm.py``` with your desired flags.
+**3. Evaluate your language model**
+
+To evaluate a language model, you just need to run ```bash evaluate_lm.py``` with your desired flags.
 
 For instance, to replicate Gulordava et al.'s (2018) results, run:
 
