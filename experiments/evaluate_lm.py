@@ -14,10 +14,15 @@ import warnings
 warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser(
-    description="Language Model Evaluation.")
+    description="Evaluate LSTMs for syntax.")
 
 parser.add_argument("--data", type=str, default="data/generated.tab",
                     help="Path to the data file to be evaluated.")
+parser.add_argument("--model", type=str,
+                    help="Path to the .pt file of the LM to be evaluated.")
+parser.add_argument("--vocab", type=str, default="data/vocab.txt",
+                    help="Path to the vocabulary corresponding to the corpus "
+                         "on which the language model has been trained.")
 parser.add_argument("--original", default=False, action="store_true",
                     help="Whether the data file is in the original format"
                          "(as in Gulordava et al. \"generated.tab\") or not.")
@@ -29,15 +34,10 @@ parser.add_argument("--print_word_probs", default=False, action="store_true",
                          "(this only is effective if the evaluation "
                          "is performed on the whole sentence, "
                          "i.e. when \"eval_target_word\" is set to False)")
-parser.add_argument("--vocab", type=str, default="data/vocab.txt",
-                    help="Path to the vocabulary corresponding to the corpus "
-                         "on which the language model has been trained.")
 parser.add_argument("--mask_target", default=False, action="store_true",
                     help="Whether to mask or not the target word(s).")
 parser.add_argument("--seed", type=int, default=532,
                     help="Random seed")
-parser.add_argument("--model_name", type=str, default="lm",
-                    help="Name of the model to perform the evaluation.")
 parser.add_argument("--cuda", action="store_true",
                     help="use CUDA")
 args = parser.parse_args()
@@ -73,6 +73,9 @@ def read_datafile():
         * pattern - type of targeted syntactic test
         * sent - the grammatical sentence to be evaluated by the language model
         * sent_alt - the ungrammatical variant of the sentence to be evaluated
+
+    If your file is in one of the formats but you want to evaluate for the other,
+    no problem -- the conversion between file formats will be done automatically.
     """
     rows = csv.DictReader(open(args.data, encoding="utf8"), delimiter="\t")
     headers = rows.fieldnames
@@ -141,11 +144,11 @@ def read_datafile_original():
         assert(row["class"] == "correct")
         assert(next_row["class"] == "wrong")
         assert(next_row["pattern"] == row["pattern"])
-        if "uncased" in args.model_name:
+        if "uncased" in args.model:
             sent = row["sent"].lower().split()
         else:
             sent = row["sent"].split()
-        if "bert" in args.model_name:
+        if "bert" in args.model:
             sent = sent[:-1]  # get rid of the <eos>
         good_form = row["form"]
         bad_form = next_row["form"]
@@ -186,18 +189,8 @@ def load_model():
     """
     Load a previously trained language model.
     """
-    if args.model_name == "lm":
-        model_path = "trained_models/hidden650_batch128_dropout0.2_lr20.0.pt"
-    elif "ccg" in args.model_name.lower():
-        model_path = "trained_models/lm_multitask_ccg.pt"
-    elif "pos" in args.model_name.lower():
-        model_path = "trained_models/lm_multitask_pos.pt"
-        # model_path = "trained_models/lm_multitask_pos_failed_ep7.pt"
-    else:
-        raise ValueError("Invalid model name: %s." % args.model_name)
-    with open(model_path, "rb") as f:
+    with open(args.model, "rb") as f:
         print("Loading the model...", file=sys.stderr)
-        print("model_name = \"%s\"." % model_path, file=sys.stderr)
         if args.cuda:
             model = torch.load(f)
         else:
@@ -230,7 +223,6 @@ def test_get_batch(source, evaluation=False):
         seq_len = len(source) - 1
         data = Variable(source[:seq_len], volatile=evaluation)
         target = Variable(source[1:1 + seq_len].view(-1))
-    # This is where data should be CUDA-fied to lessen OOM errors
     if args.cuda:
         return data.cuda(), target.cuda()
     else:
@@ -419,32 +411,22 @@ def main():
     else:
         data = read_datafile()
 
-    # Load the corpus vocabulary into a dictionary.
-    dictionary = Dictionary(args.vocab)
-    print("Vocabulary size = ", len(dictionary), file=sys.stderr)
-
     # Load and evaluate a pre-trained language model.
-    if "lm" in args.model_name:
+    if "bert" in args.model:
+        model_name = "bert-base-" if "base" in args.model else "bert-large-"
+        do_lower_case = "uncased" in args.model
+        model_name += "uncased" if do_lower_case else "cased"
+        bert = BertForMaskedLM.from_pretrained(model_name)
+        tokenizer = tokenization.BertTokenizer.from_pretrained(
+            model_name, do_lower_case=do_lower_case)
+        evaluate_bert(data, bert, tokenizer)
+    else:
+        dictionary = Dictionary(args.vocab)
         model = load_model()
         if args.eval_target_word:
             evaluate_lm_target_words(data, model, dictionary)
         else:
             evaluate_lm_sentences(data, model, dictionary)
-    elif "bert" in args.model_name:
-        if "uncased" in args.model_name:
-            case = "uncased"
-        else:
-            case = "cased"
-        model_name = "bert-large-" + case
-        if "base" in args.model_name:
-            model_name = "bert-base-" + case
-        bert = BertForMaskedLM.from_pretrained(model_name)
-        do_lower_case = "uncased" in args.model_name
-        tokenizer = tokenization.BertTokenizer.from_pretrained(
-            model_name, do_lower_case=do_lower_case)
-        evaluate_bert(data, bert, tokenizer)
-    else:
-        raise ValueError("Invalid model name %s!" % args.model_name)
 
 
 if __name__ == "__main__":
